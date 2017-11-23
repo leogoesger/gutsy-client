@@ -1,3 +1,4 @@
+import request from 'superagent';
 import * as types from '../action-types/actionTypes';
 
 const fetchCurrentUserSuccess = currentUser => {
@@ -6,8 +7,10 @@ const fetchCurrentUserSuccess = currentUser => {
     currentUser,
   };
 };
+
 export function fetchCurrentUser() {
-  return function(dispatch) {
+  return async dispatch => {
+    await request.get('http://localhost:8000/api/areas');
     const currentUser = 'noelle';
     return dispatch(fetchCurrentUserSuccess(currentUser));
   };

@@ -1,14 +1,16 @@
 import {FETCH_CURRENT_USER} from '../action-types/actionTypes';
 import objectAssign from 'object-assign';
 
-const initialState = {
-  user: null,
+type STATE = {};
+type ACTION = {};
+const initialState: STATE = {
+  user: 'Leo',
 };
 
-export default function(state = initialState, action) {
+export default function(state: STATE = initialState, action: ACTION) {
   switch (action.type) {
     case FETCH_CURRENT_USER:
-      return objectAssign({}, state, {user: action});
+      return objectAssign({}, state, {user: action.currentUser});
 
     default:
       return state;

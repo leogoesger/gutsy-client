@@ -1,31 +1,39 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {bindActionCreators} from 'redux';
 import {fetchCurrentUser} from '../actions/home';
 
 import Layout from '../components/home/Layout';
 
 export class Home extends React.Component {
+  _fetchCurrentUser() {
+    this.props.fetchCurrentUser();
+  }
   render() {
-    return <Layout />;
+    return (
+      <Layout
+        user={this.props.user}
+        fetchCurrentUser={() => this._fetchCurrentUser()}
+      />
+    );
   }
 }
 
 Home.propTypes = {
   fetchCurrentUser: PropTypes.func.isRequired,
+  user: PropTypes.string,
 };
 
-function mapStateToProps(state) {
+const mapStateToProps = state => {
   return {
-    user: state.user,
+    user: state.home.user,
   };
-}
+};
 
-function mapDispatchToProps(dispatch) {
+const mapDispatchToProps = dispatch => {
   return {
-    fetchCurrentUser: bindActionCreators(fetchCurrentUser, dispatch),
+    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
   };
-}
+};
 
 export default connect(mapStateToProps, mapDispatchToProps)(Home);
