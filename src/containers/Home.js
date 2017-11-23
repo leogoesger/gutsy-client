@@ -13,8 +13,7 @@ export class Home extends React.Component {
 }
 
 Home.propTypes = {
-  fetchCurrentUser: PropTypes.object.isRequired,
-  user: PropTypes.object.isRequired,
+  fetchCurrentUser: PropTypes.func.isRequired,
 };
 
 function mapStateToProps(state) {

@@ -4,8 +4,6 @@ import PropTypes from 'prop-types';
 import {Switch, Route} from 'react-router-dom';
 
 import Home from '../containers/Home';
-import About from '../containers/About';
-import NotFoundPage from '../containers/NotFoundPage';
 
 // This is a class-based component because the current
 // version of hot reloading won't hot reload a stateless
@@ -17,8 +15,6 @@ class App extends React.Component {
       <div>
         <Switch>
           <Route exact path="/" component={Home} />
-          <Route path="/about" component={About} />
-          <Route component={NotFoundPage} />
         </Switch>
       </div>
     );
