@@ -34,7 +34,7 @@ const Header = () => {
         <FlatButton
           className="e2e-header-sign-up-btn"
           label="Sign Up"
-          style={Buttons.whiteButton}
+          style={Buttons.blackButton}
           labelStyle={styles.headerWhiteButtonLabel}
           onClick={() => navigateTo('/signUp')}
         />

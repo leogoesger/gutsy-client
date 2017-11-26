@@ -12,7 +12,7 @@ export default class UserDetailsCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      firstName: '',
+      isComplete: true,
     };
   }
   _isFormComplete() {
@@ -33,7 +33,7 @@ export default class UserDetailsCard extends React.Component {
             padding: '15px 0px',
           }}
           title="Sign Up"
-          subtitle="Welcome, please enter your information below to get started. Please enter the name that is on your license."
+          subtitle="Welcome, please enter your information below to get started."
           subtitleStyle={{
             width: '100%',
           }}
@@ -42,10 +42,10 @@ export default class UserDetailsCard extends React.Component {
           style={{
             textAlign: 'left',
             padding: '0px',
-            width: '95%',
+            width: '100%',
           }}
         >
-          <UserDetailsForm />
+          <UserDetailsForm fetchCurrentUser={this.props.fetchCurrentUser} />
           <div
             style={{
               textAlign: 'right',
@@ -64,7 +64,7 @@ export default class UserDetailsCard extends React.Component {
               <FlatButton
                 className="linkButton"
                 label="Log In"
-                style={Buttons.linkButton}
+                style={styles.linkButton}
                 labelStyle={Buttons.buttonLabelLink}
                 onClick={() => navigateTo('/login')}
               />
@@ -74,9 +74,10 @@ export default class UserDetailsCard extends React.Component {
               type="submit"
               style={
                 this._isFormValid()
-                  ? Buttons.whiteButton
+                  ? Buttons.orangeButton
                   : Buttons.disabledButton
               }
+              labelStyle={Buttons.orangeButtonLabel}
               disabled={!this._isFormValid()}
             />
           </div>
@@ -103,5 +104,9 @@ const styles = {
     paddingLeft: '6px',
     maxWidth: '400px',
     overflow: 'visible',
+  },
+  linkButton: {
+    ...Buttons.linkButton,
+    textAlign: 'left',
   },
 };

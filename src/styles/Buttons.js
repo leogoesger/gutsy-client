@@ -2,10 +2,21 @@ import {Colors} from './Colors';
 import {Theme} from './Theme';
 
 export const Buttons = {
-  whiteButton: {
+  blackButton: {
     backgroundColor: Colors.black,
     height: Theme.buttonHeight,
     borderRadius: Theme.buttonBorderRadius,
+  },
+  orangeButton: {
+    backgroundColor: Colors.orange,
+    height: Theme.buttonHeight,
+    borderRadius: Theme.buttonBorderRadius,
+  },
+  orangeButtonLabel: {
+    textTransform: 'none',
+    color: Colors.white,
+    fontSize: Theme.buttonLabelSize,
+    padding: '0px',
   },
   buttonLabelSmaller: {
     textTransform: 'none',
@@ -13,7 +24,6 @@ export const Buttons = {
     padding: '5px 15px',
     whiteSpace: 'nowrap',
   },
-
   linkButton: {
     backgroundColor: 'transparent',
     height: Theme.buttonHeight,
@@ -23,7 +33,7 @@ export const Buttons = {
   buttonLabelLink: {
     fontWeight: 'bold',
     textTransform: 'none',
-    color: Colors.black,
+    color: Colors.orange,
     fontSize: Theme.buttonLabelSize,
     padding: '0px',
   },
@@ -33,5 +43,6 @@ export const Buttons = {
     color: Colors.disabledButtonFonts,
     height: Theme.buttonHeight,
     borderRadius: Theme.buttonBorderRadius,
+    cursor: 'not-allowed',
   },
 };
