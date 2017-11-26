@@ -5,6 +5,8 @@ import {Switch, Route} from 'react-router-dom';
 import MuiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 import Home from '../containers/Home';
+import SignUp from '../containers/SignUp';
+import Login from '../containers/LogIn';
 
 class App extends React.Component {
   render() {
@@ -13,6 +15,8 @@ class App extends React.Component {
         <MuiThemeProvider>
           <Switch>
             <Route exact path="/" component={Home} />
+            <Route exact path="/signUp" component={SignUp} />
+            <Route exact path="/login" component={Login} />
           </Switch>
         </MuiThemeProvider>
       </div>

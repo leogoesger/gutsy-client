@@ -3,9 +3,9 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {fetchCurrentUser} from '../actions/user-account';
 
-import Layout from '../components/home/Layout';
+import Layout from '../components/signUp/Layout';
 
-export class Home extends React.Component {
+export class SignUp extends React.Component {
   _fetchCurrentUser() {
     this.props.fetchCurrentUser();
   }
@@ -19,7 +19,7 @@ export class Home extends React.Component {
   }
 }
 
-Home.propTypes = {
+SignUp.propTypes = {
   fetchCurrentUser: PropTypes.func.isRequired,
   user: PropTypes.string,
 };
@@ -36,4 +36,4 @@ const mapDispatchToProps = dispatch => {
   };
 };
 
-export default connect(mapStateToProps, mapDispatchToProps)(Home);
+export default connect(mapStateToProps, mapDispatchToProps)(SignUp);

@@ -12,7 +12,7 @@ const Layout = props => {
     <div>
       <Header user={props.user} />
       <div style={{paddingTop: '60px', paddingLeft: '60px'}}>
-        <h2 className="alt-header">About</h2>
+        <h2 className="alt-header">Login</h2>
         <p>
           This example app is part of the $$$$$$$$$ {props.user}
           <a href="https://github.com/coryhouse/react-slingshot">

@@ -1,11 +1,11 @@
 import {combineReducers} from 'redux';
 import {routerReducer} from 'react-router-redux';
 
-import home from './home';
+import userAccount from './user-account';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
-  home,
+  userAccount,
 });
 
 export default rootReducer;
