@@ -44,3 +44,10 @@ export function getConfirmPasswordErrorMessage(password, confirmPassword) {
     return 'Passwords do not match';
   }
 }
+
+export function capitalize(string) {
+  if (!string) {
+    return;
+  }
+  return string.charAt(0).toUpperCase() + string.slice(1);
+}

@@ -6,28 +6,73 @@ import {Card, CardTitle, CardText} from 'material-ui/Card';
 import {Buttons} from '../../styles/Buttons';
 import {CardStyles} from '../../styles/Cards';
 import UserDetailsForm from './UserDetailsForm';
-import {navigateTo} from '../../utils/helpers';
+import {
+  navigateTo,
+  capitalize,
+  validateEmail,
+  validatePassword,
+  validateConfirmPassword,
+} from '../../utils/helpers';
 
 export default class UserDetailsCard extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      isComplete: true,
+      userData: {
+        firstName: '',
+        lastName: '',
+        email: '',
+        password: '',
+      },
+      confirmPassword: '',
     };
   }
+
+  _handleUserDataChange(value, property) {
+    const {userData} = this.state;
+    if (property === 'firstName' || property === 'lastName') {
+      userData[property] = capitalize(value);
+    } else {
+      userData[property] = value;
+    }
+    this.setState({
+      userData,
+    });
+  }
+
+  _handleConfirmPasswordChange(value) {
+    this.setState({confirmPassword: value});
+  }
+
   _isFormComplete() {
-    return true;
+    return Boolean(
+      this.state.userData.firstName &&
+        this.state.userData.lastName &&
+        this.state.userData.email &&
+        this.state.userData.password &&
+        this.state.confirmPassword
+    );
   }
 
   _isFormValid() {
-    return true;
+    if (!this._isFormComplete()) {
+      return false;
+    }
+    return Boolean(
+      validateEmail(this.state.userData.email) &&
+        validatePassword(this.state.userData.password) &&
+        validateConfirmPassword(
+          this.state.userData.password,
+          this.state.confirmPassword
+        )
+    );
   }
 
   render() {
     return (
       <Card style={styles.mainCard}>
         <CardTitle
-          style={{textAlign: 'left', padding: '0px'}}
+          style={{textAlign: 'left', padding: '0px', marginBottom: '10px'}}
           titleStyle={{
             fontSize: '36px',
             padding: '15px 0px',
@@ -45,7 +90,12 @@ export default class UserDetailsCard extends React.Component {
             width: '100%',
           }}
         >
-          <UserDetailsForm fetchCurrentUser={this.props.fetchCurrentUser} />
+          <UserDetailsForm
+            handleUserDataChange={(value, property) =>
+              this._handleUserDataChange(value, property)}
+            handleConfirmPasswordChange={value =>
+              this._handleConfirmPasswordChange(value)}
+          />
           <div
             style={{
               textAlign: 'right',
@@ -79,6 +129,7 @@ export default class UserDetailsCard extends React.Component {
               }
               labelStyle={Buttons.orangeButtonLabel}
               disabled={!this._isFormValid()}
+              onClick={() => this.props.signUpUser(this.state.userData)}
             />
           </div>
         </CardText>
@@ -88,7 +139,7 @@ export default class UserDetailsCard extends React.Component {
 }
 
 UserDetailsCard.propTypes = {
-  fetchCurrentUser: PropTypes.func.isRequired,
+  signUpUser: PropTypes.func.isRequired,
 };
 
 const styles = {

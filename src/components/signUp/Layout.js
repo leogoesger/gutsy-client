@@ -8,13 +8,13 @@ const Layout = props => {
   return (
     <div>
       <Header user={props.user} />
-      <UserDetailCard fetchCurrentUser={props.fetchCurrentUser} />
+      <UserDetailCard signUpUser={userData => props.signUpUser(userData)} />
     </div>
   );
 };
 
 Layout.propTypes = {
-  fetchCurrentUser: PropTypes.func.isRequired,
+  signUpUser: PropTypes.func.isRequired,
   user: PropTypes.string,
 };
 

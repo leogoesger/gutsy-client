@@ -25,6 +25,11 @@ export default class UserDetailsForm extends React.Component {
     this.setState({
       [property]: value,
     });
+    if (property === 'confirmPassword') {
+      this.props.handleConfirmPasswordChange(value);
+    } else {
+      this.props.handleUserDataChange(value, property);
+    }
   }
 
   render() {
@@ -105,5 +110,6 @@ export default class UserDetailsForm extends React.Component {
 }
 
 UserDetailsForm.propTypes = {
-  fetchCurrentUser: PropTypes.func.isRequired,
+  handleUserDataChange: PropTypes.func.isRequired,
+  handleConfirmPasswordChange: PropTypes.func.isRequired,
 };

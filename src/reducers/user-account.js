@@ -1,4 +1,4 @@
-import {FETCH_CURRENT_USER} from '../action-types/actionTypes';
+import {UserAccountTypes as types} from '../action-types';
 import objectAssign from 'object-assign';
 
 type STATE = {};
@@ -9,9 +9,11 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION) {
   switch (action.type) {
-    case FETCH_CURRENT_USER:
+    case types.FETCH_CURRENT_USER:
       return objectAssign({}, state, {user: action.currentUser});
 
+    case types.SIGN_UP_SUCCESS:
+      return objectAssign({}, state, {user: action.currentUser.firstName});
     default:
       return state;
   }
