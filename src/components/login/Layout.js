@@ -8,13 +8,12 @@ const Layout = props => {
   return (
     <div>
       <Header user={props.user} />
-      <LoginCard fetchCurrentUser={props.fetchCurrentUser} />
+      <LoginCard />
     </div>
   );
 };
 
 Layout.propTypes = {
-  fetchCurrentUser: PropTypes.func.isRequired,
   user: PropTypes.string,
 };
 

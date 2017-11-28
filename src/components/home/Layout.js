@@ -5,9 +5,6 @@ import FlatButton from 'material-ui/FlatButton';
 import Header from '../shared/Header';
 
 const Layout = props => {
-  function _fetchCurrentUser() {
-    props.fetchCurrentUser();
-  }
   return (
     <div>
       <Header user={props.user} />
@@ -19,14 +16,13 @@ const Layout = props => {
             React-Slngshot starter kit
           </a>
         </p>
-        <FlatButton label="Default" onClick={() => _fetchCurrentUser()} />{' '}
+        <FlatButton label="Default" />
       </div>
     </div>
   );
 };
 
 Layout.propTypes = {
-  fetchCurrentUser: PropTypes.func.isRequired,
   user: PropTypes.string,
 };
 

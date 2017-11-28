@@ -5,6 +5,7 @@ import {Card, CardTitle, CardText} from 'material-ui/Card';
 
 import {Buttons} from '../../styles/Buttons';
 import {CardStyles} from '../../styles/Cards';
+import {Colors} from '../../styles/Colors';
 import UserDetailsForm from './UserDetailsForm';
 import {
   navigateTo,
@@ -147,7 +148,7 @@ const styles = {
     textAlign: 'left',
     display: 'block',
     fontSize: '12px',
-    color: '#da176d',
+    color: Colors.orange,
     margin: '0px 0px 20px 0px',
   },
   mainCard: {
