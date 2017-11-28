@@ -1,26 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchCurrentUser} from '../actions/user-account';
 
 import Layout from '../components/login/Layout';
 
 export class Login extends React.Component {
-  _fetchCurrentUser() {
-    this.props.fetchCurrentUser();
-  }
   render() {
-    return (
-      <Layout
-        user={this.props.user}
-        fetchCurrentUser={() => this._fetchCurrentUser()}
-      />
-    );
+    return <Layout user={this.props.user} />;
   }
 }
 
 Login.propTypes = {
-  fetchCurrentUser: PropTypes.func.isRequired,
   user: PropTypes.string,
 };
 
@@ -32,7 +22,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+    fetchCurrentUser: () => dispatch(),
   };
 };
 
