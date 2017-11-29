@@ -18,12 +18,19 @@ export const Buttons = {
     fontSize: Theme.buttonLabelSize,
     padding: '0px',
   },
+  buttonLabelSize: {
+    textTransform: 'none',
+    fontSize: Theme.buttonLabelSize,
+    padding: '5px 15px',
+    whiteSpace: 'nowrap',
+  },
   buttonLabelSmaller: {
     textTransform: 'none',
     fontSize: Theme.buttonLabelSmaller,
     padding: '5px 15px',
     whiteSpace: 'nowrap',
   },
+
   linkButton: {
     backgroundColor: 'transparent',
     height: Theme.buttonHeight,

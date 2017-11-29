@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {signUpUser} from '../actions/user-account';
 
+import {signUpUser} from '../actions/user-account';
 import Layout from '../components/signUp/Layout';
 
 export class SignUp extends React.Component {

@@ -8,49 +8,76 @@ import {Colors} from '../../styles/Colors';
 import {Buttons} from '../../styles/Buttons';
 import {navigateTo} from '../../utils/helpers';
 
-const Header = () => {
-  return (
-    <div style={styles.container}>
-      <div style={styles.logo} onClick={() => navigateTo('/')}>
-        <span style={{lineHeight: '60px'}}>{'Gutsy'}</span>
+class Header extends React.Component {
+  constructor(props) {
+    super(props);
+  }
+  _renderUserAction(user) {
+    if (user) {
+      return (
+        <div style={styles.userDiv}>
+          <FlatButton
+            label={user}
+            className="loginBtn e2e-header-login-btn"
+            labelPosition="after"
+            icon={<Person />}
+            style={styles.headerLogInButton}
+            labelStyle={Buttons.buttonLabelSize}
+            onClick={() => navigateTo('/login')}
+          />
+        </div>
+      );
+    } else {
+      return (
+        <div style={styles.userDiv}>
+          <FlatButton
+            className="e2e-header-sign-up-btn"
+            label="Sign Up"
+            style={Buttons.blackButton}
+            labelStyle={styles.headerWhiteButtonLabel}
+            onClick={() => navigateTo('/signUp')}
+          />
+          <FlatButton
+            label="Log In"
+            className="loginBtn e2e-header-login-btn"
+            labelPosition="after"
+            icon={<Person />}
+            style={styles.headerLogInButton}
+            labelStyle={Buttons.buttonLabelSmaller}
+            onClick={() => navigateTo('/login')}
+          />
+        </div>
+      );
+    }
+  }
+
+  render() {
+    return (
+      <div style={styles.container}>
+        <div style={styles.logo} onClick={() => navigateTo('/')}>
+          <span style={{lineHeight: '60px'}}>{'Gutsy'}</span>
+        </div>
+        <div className="main-menu">
+          <ul style={styles.headerList}>
+            <li className="headerListItem" style={styles.headerListItem}>
+              {'HOME'}
+            </li>
+            <li className="headerListItem" style={styles.headerListItem}>
+              {'ABOUT'}
+            </li>
+            <li className="headerListItem" style={styles.headerListItem}>
+              {'CLIMBS'}
+            </li>
+            <li className="headerListItem" style={styles.headerListItem}>
+              {'BOOKS'}
+            </li>
+          </ul>
+        </div>
+        {this._renderUserAction(this.props.user)}
       </div>
-      <div className="main-menu">
-        <ul style={styles.headerList}>
-          <li className="headerListItem" style={styles.headerListItem}>
-            {'HOME'}
-          </li>
-          <li className="headerListItem" style={styles.headerListItem}>
-            {'ABOUT'}
-          </li>
-          <li className="headerListItem" style={styles.headerListItem}>
-            {'CLIMBS'}
-          </li>
-          <li className="headerListItem" style={styles.headerListItem}>
-            {'BOOKS'}
-          </li>
-        </ul>
-      </div>
-      <div style={styles.userDiv}>
-        <FlatButton
-          className="e2e-header-sign-up-btn"
-          label="Sign Up"
-          style={Buttons.blackButton}
-          labelStyle={styles.headerWhiteButtonLabel}
-          onClick={() => navigateTo('/signUp')}
-        />
-        <FlatButton
-          label="Log In"
-          className="loginBtn e2e-header-login-btn"
-          labelPosition="after"
-          icon={<Person />}
-          style={styles.headerLogInButton}
-          labelStyle={Buttons.buttonLabelSmaller}
-          onClick={() => navigateTo('/login')}
-        />
-      </div>
-    </div>
-  );
-};
+    );
+  }
+}
 
 const styles = {
   logo: {

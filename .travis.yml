@@ -2,7 +2,8 @@ language: node_js
 cache: yarn
 node_js:
   - "7"
-script: yarn run test:CI
+script:
+  - yarn run test:CI
+  - yarn lint
 after_success:
-  # Send coverage data to coveralls.
   - yarn run test:cover:CI
