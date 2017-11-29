@@ -2,8 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 
-import Header from '../shared/Header';
-
+import Header from '../../containers/Header';
 const Layout = props => {
   return (
     <div>

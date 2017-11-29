@@ -32,7 +32,7 @@ export default function(state: STATE = initialState, action: ACTION) {
       return objectAssign({}, state, {loginErrorMessage: null});
 
     case types.LOG_IN_SUCCESS:
-      return objectAssign({}, state, {user: 'leo'});
+      return objectAssign({}, state, {user: action.currentUser.firstName});
 
     case types.LOG_IN_FAIL: {
       let loginErrorMessage = null;
@@ -40,6 +40,14 @@ export default function(state: STATE = initialState, action: ACTION) {
         loginErrorMessage = messagesMap.KNOWN_EMAIL_ERROR;
       }
       return objectAssign({}, state, {loginErrorMessage});
+    }
+
+    case types.FETCH_CURRENT_USER_SUCCESS: {
+      return objectAssign({}, state, {user: action.currentUser.firstName});
+    }
+
+    case types.LOG_OUT_USER: {
+      return objectAssign({}, state, {user: ''});
     }
 
     default:

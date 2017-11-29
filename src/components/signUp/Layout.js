@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 
-import Header from '../shared/Header';
+import Header from '../../containers/Header';
 import UserDetailCard from './UserDetailCard';
 import {autoHideDuration} from '../../utils/constants';
 

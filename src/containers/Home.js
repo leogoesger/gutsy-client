@@ -5,9 +5,6 @@ import {connect} from 'react-redux';
 import Layout from '../components/home/Layout';
 
 export class Home extends React.Component {
-  _fetchCurrentUser() {
-    this.props.fetchCurrentUser();
-  }
   render() {
     return <Layout user={this.props.user} />;
   }

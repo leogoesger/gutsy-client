@@ -3,15 +3,16 @@ import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import Person from 'material-ui/svg-icons/social/person';
 
-import {Theme} from '../../styles/Theme';
-import {Colors} from '../../styles/Colors';
-import {Buttons} from '../../styles/Buttons';
-import {navigateTo} from '../../utils/helpers';
+import {Theme} from '../../../styles/Theme';
+import {Colors} from '../../../styles/Colors';
+import {Buttons} from '../../../styles/Buttons';
+import {navigateTo} from '../../../utils/helpers';
 
-class Header extends React.Component {
+export default class Layout extends React.Component {
   constructor(props) {
     super(props);
   }
+
   _renderUserAction(user) {
     if (user) {
       return (
@@ -23,7 +24,7 @@ class Header extends React.Component {
             icon={<Person />}
             style={styles.headerLogInButton}
             labelStyle={Buttons.buttonLabelSize}
-            onClick={() => navigateTo('/login')}
+            onClick={() => this.props.logOutUser()}
           />
         </div>
       );
@@ -125,8 +126,8 @@ const styles = {
     color: Colors.white,
   },
 };
-Header.propTypes = {
-  user: PropTypes.string,
-};
 
-export default Header;
+Layout.propTypes = {
+  user: PropTypes.string,
+  logOutUser: PropTypes.func.isRequired,
+};
