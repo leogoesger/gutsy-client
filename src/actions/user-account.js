@@ -63,7 +63,7 @@ export function signUpUser(userData) {
     try {
       dispatch(signUpRequest());
       const signUpReponse = await request.post(`${url}/signup`).send(userData);
-      set(window.localStorage, 'gutsyJwt', signUpReponse.body.myToken);
+      set(window.localStorage, 'gutsyJwt', signUpReponse.body.gutsyJwt);
       dispatch(signUpSuccessObject(signUpReponse.body.user));
       navigateTo('/');
     } catch (e) {
@@ -77,7 +77,7 @@ export function loginUser(userData) {
     try {
       dispatch(loginRequest());
       const loginResponse = await request.post(`${url}/login`).send(userData);
-      set(window.localStorage, 'gutsyJwt', loginResponse.body.myToken);
+      set(window.localStorage, 'gutsyJwt', loginResponse.body.gutsyJwt);
       dispatch(loginSuccessObject(loginResponse.body.user));
       navigateTo('/');
     } catch (e) {
