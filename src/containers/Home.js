@@ -1,7 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
-import {fetchCurrentUser} from '../actions/home';
 
 import Layout from '../components/home/Layout';
 
@@ -10,12 +9,7 @@ export class Home extends React.Component {
     this.props.fetchCurrentUser();
   }
   render() {
-    return (
-      <Layout
-        user={this.props.user}
-        fetchCurrentUser={() => this._fetchCurrentUser()}
-      />
-    );
+    return <Layout user={this.props.user} />;
   }
 }
 
@@ -26,13 +20,13 @@ Home.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    user: state.home.user,
+    user: state.userAccount.user,
   };
 };
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchCurrentUser: () => dispatch(fetchCurrentUser()),
+    fetchCurrentUser: () => dispatch(),
   };
 };
 
