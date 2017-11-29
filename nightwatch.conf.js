@@ -1,5 +1,6 @@
+/* eslint-disable */
+
 require('babel-register')(); // allow ES6
-require('dotenv').config();
 
 const SCREENSHOT_PATH = './screenshots/';
 const BINPATH = './node_modules/nightwatch/bin/';

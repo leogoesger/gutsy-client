@@ -2,8 +2,6 @@ export default {
   // ERRORS
   UNKNOWN_EMAIL_ERROR: 'We do not have your record. Please Sign up.',
   KNOWN_EMAIL_ERROR: 'We already have your record. Please Log in.',
-  OLD_SYSTEM_USER_ERROR:
-    'Your email existed in old paragon system. Please use Migration functionality.',
   LOGIN_CREDENTIALS_ERROR: 'Your password is incorrect.',
 
   RESET_EXPIRED_ERROR: 'Reset Link is expired.',
@@ -17,8 +15,6 @@ export default {
   VERIFICATION_INCORRECT_ERROR: 'Verification link is incorrect.',
   MAGIC_LINK_INCORRECT_ERROR: 'Magic Link is incorrect.',
   PAYMENT_LINK_INCORRECT_ERROR: 'Payment Link is incorrect.',
-
-  FINAL_SUPPORT_ERROR: 'Please contact Paragon staff for help.',
 
   // SUCCESSES
   ADD_LICENSE_SUCCESS: 'License Created.',

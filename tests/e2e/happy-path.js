@@ -1,19 +1,13 @@
-import fetch from 'isomorphic-fetch';
+/* eslint-disable no-console */
+const globals = require('./settings/globals.js');
 
 module.exports = {
-  reporter(results, cb) {
-    fetch(
-      'http://localhost:4444/selenium-server/driver/?cmd=shutDownSeleniumServer'
-    ).then(() => {
-      cb();
-      if (
-        (typeof results.failed === 'undefined' || results.failed === 0) &&
-        (typeof results.error === 'undefined' || results.error === 0)
-      ) {
-        process.exit(0);
-      } else {
-        process.exit(1);
-      }
-    });
+  '@tags': ['happy-path'],
+
+  'Happy-Path': browser => {
+    return browser
+      .url(globals.url)
+      .pause(6000000)
+      .end();
   },
 };
