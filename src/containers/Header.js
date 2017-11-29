@@ -8,7 +8,7 @@ import Layout from '../components/shared/header/Layout';
 class Header extends React.Component {
   constructor(props) {
     super(props);
-    if (window.localStorage.gutsyJwt && !props.user) {
+    if (window.localStorage.gutsyJwt && !props.currentUser) {
       this.props.fetchCurrentUser();
     }
   }
@@ -16,7 +16,7 @@ class Header extends React.Component {
   render() {
     return (
       <Layout
-        user={this.props.user}
+        currentUser={this.props.currentUser}
         logOutUser={() => this.props.logOutUser()}
       />
     );
@@ -24,14 +24,14 @@ class Header extends React.Component {
 }
 
 Header.propTypes = {
-  user: PropTypes.string,
+  currentUser: PropTypes.object,
   fetchCurrentUser: PropTypes.func.isRequired,
   logOutUser: PropTypes.func.isRequired,
 };
 
 const mapStateToProps = state => {
   return {
-    user: state.userAccount.user,
+    currentUser: state.userAccount.currentUser,
   };
 };
 

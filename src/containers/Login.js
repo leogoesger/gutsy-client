@@ -9,7 +9,7 @@ export class Login extends React.Component {
   render() {
     return (
       <Layout
-        user={this.props.user}
+        currentUser={this.props.currentUser}
         loginUser={userData => this.props.loginUser(userData)}
         message={this.props.message}
       />
@@ -18,14 +18,14 @@ export class Login extends React.Component {
 }
 
 Login.propTypes = {
-  user: PropTypes.string,
+  currentUser: PropTypes.object,
   loginUser: PropTypes.func.isRequired,
   message: PropTypes.string,
 };
 
 const mapStateToProps = state => {
   return {
-    user: state.userAccount.user,
+    currentUser: state.userAccount.currentUser,
     message: state.userAccount.loginErrorMessage,
   };
 };

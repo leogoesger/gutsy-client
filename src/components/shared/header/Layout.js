@@ -13,12 +13,12 @@ export default class Layout extends React.Component {
     super(props);
   }
 
-  _renderUserAction(user) {
-    if (user) {
+  _renderUserAction() {
+    if (this.props.currentUser) {
       return (
         <div style={styles.userDiv}>
           <FlatButton
-            label={user}
+            label={this.props.currentUser.firstName}
             className="loginBtn e2e-header-login-btn"
             labelPosition="after"
             icon={<Person />}
@@ -74,7 +74,7 @@ export default class Layout extends React.Component {
             </li>
           </ul>
         </div>
-        {this._renderUserAction(this.props.user)}
+        {this._renderUserAction()}
       </div>
     );
   }
@@ -128,6 +128,6 @@ const styles = {
 };
 
 Layout.propTypes = {
-  user: PropTypes.string,
+  currentUser: PropTypes.object,
   logOutUser: PropTypes.func.isRequired,
 };

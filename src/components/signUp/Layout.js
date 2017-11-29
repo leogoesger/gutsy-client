@@ -35,7 +35,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header user={this.props.user} />
+        <Header currentUser={this.props.currentUser} />
         <UserDetailCard
           signUpUser={userData => this.props.signUpUser(userData)}
         />
@@ -55,6 +55,6 @@ export default class Layout extends React.Component {
 
 Layout.propTypes = {
   signUpUser: PropTypes.func.isRequired,
-  user: PropTypes.string,
+  currentUser: PropTypes.object,
   message: PropTypes.string,
 };
