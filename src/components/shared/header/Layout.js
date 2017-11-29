@@ -3,27 +3,28 @@ import PropTypes from 'prop-types';
 import FlatButton from 'material-ui/FlatButton';
 import Person from 'material-ui/svg-icons/social/person';
 
-import {Theme} from '../../styles/Theme';
-import {Colors} from '../../styles/Colors';
-import {Buttons} from '../../styles/Buttons';
-import {navigateTo} from '../../utils/helpers';
+import {Theme} from '../../../styles/Theme';
+import {Colors} from '../../../styles/Colors';
+import {Buttons} from '../../../styles/Buttons';
+import {navigateTo} from '../../../utils/helpers';
 
-class Header extends React.Component {
+export default class Layout extends React.Component {
   constructor(props) {
     super(props);
   }
-  _renderUserAction(user) {
-    if (user) {
+
+  _renderUserAction() {
+    if (this.props.currentUser) {
       return (
         <div style={styles.userDiv}>
           <FlatButton
-            label={user}
+            label={this.props.currentUser.firstName}
             className="loginBtn e2e-header-login-btn"
             labelPosition="after"
             icon={<Person />}
             style={styles.headerLogInButton}
             labelStyle={Buttons.buttonLabelSize}
-            onClick={() => navigateTo('/login')}
+            onClick={() => this.props.logOutUser()}
           />
         </div>
       );
@@ -73,7 +74,7 @@ class Header extends React.Component {
             </li>
           </ul>
         </div>
-        {this._renderUserAction(this.props.user)}
+        {this._renderUserAction()}
       </div>
     );
   }
@@ -125,8 +126,8 @@ const styles = {
     color: Colors.white,
   },
 };
-Header.propTypes = {
-  user: PropTypes.string,
-};
 
-export default Header;
+Layout.propTypes = {
+  currentUser: PropTypes.object,
+  logOutUser: PropTypes.func.isRequired,
+};

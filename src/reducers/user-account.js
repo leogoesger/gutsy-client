@@ -7,7 +7,7 @@ import {messagesMap} from '../static-data';
 type STATE = {};
 type ACTION = {};
 const initialState: STATE = {
-  user: '',
+  currentUser: null,
   signUpErrorMessage: null,
   loginErrorMessage: null,
 };
@@ -18,7 +18,7 @@ export default function(state: STATE = initialState, action: ACTION) {
       return objectAssign({}, state, {signUpErrorMessage: null});
 
     case types.SIGN_UP_SUCCESS:
-      return objectAssign({}, state, {user: action.currentUser.firstName});
+      return objectAssign({}, state, {currentUser: action.currentUser});
 
     case types.SIGN_UP_FAIL: {
       let signUpErrorMessage = null;
@@ -32,7 +32,7 @@ export default function(state: STATE = initialState, action: ACTION) {
       return objectAssign({}, state, {loginErrorMessage: null});
 
     case types.LOG_IN_SUCCESS:
-      return objectAssign({}, state, {user: 'leo'});
+      return objectAssign({}, state, {currentUser: action.currentUser});
 
     case types.LOG_IN_FAIL: {
       let loginErrorMessage = null;
@@ -40,6 +40,14 @@ export default function(state: STATE = initialState, action: ACTION) {
         loginErrorMessage = messagesMap.KNOWN_EMAIL_ERROR;
       }
       return objectAssign({}, state, {loginErrorMessage});
+    }
+
+    case types.FETCH_CURRENT_USER_SUCCESS: {
+      return objectAssign({}, state, {currentUser: action.currentUser});
+    }
+
+    case types.LOG_OUT_USER: {
+      return objectAssign({}, state, {currentUser: null});
     }
 
     default:

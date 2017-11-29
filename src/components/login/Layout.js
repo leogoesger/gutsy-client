@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 
-import Header from '../shared/Header';
+import Header from '../../containers/Header';
 import LoginCard from './LoginCard';
 import {autoHideDuration} from '../../utils/constants';
 
@@ -35,7 +35,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header user={this.props.user} />
+        <Header currentUser={this.props.currentUser} />
         <LoginCard loginUser={userData => this.props.loginUser(userData)} />
         <Snackbar
           style={{color: 'black'}}
@@ -52,7 +52,7 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
+  currentUser: PropTypes.object,
   loginUser: PropTypes.func.isRequired,
-  user: PropTypes.string,
   message: PropTypes.string,
 };
