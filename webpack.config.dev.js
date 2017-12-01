@@ -1,5 +1,6 @@
 import webpack from 'webpack';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 import path from 'path';
 
 export default {
@@ -37,91 +38,38 @@ export default {
       },
       inject: true,
     }),
+    new webpack.LoaderOptionsPlugin({
+      minimize: false,
+      debug: true,
+      // set to false to see a list of every file being bundled.
+      noInfo: true,
+      options: {
+        context: '/',
+        postcss: () => [autoprefixer],
+      },
+    }),
   ],
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        use: ['file-loader'],
-      },
+      {test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/font-woff',
-            },
-          },
-        ],
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
       },
       {
         test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/octet-stream',
-            },
-          },
-        ],
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'image/svg+xml',
-            },
-          },
-        ],
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
       },
+      {test: /\.(jpe?g|png|gif)$/i, loader: 'file-loader?name=[name].[ext]'},
+      {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
       {
-        test: /\.(jpe?g|png|gif|ico)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-            },
-          },
-        ],
-      },
-      {
-        test: /(\.css|\.scss|\.sass)$/,
-        exclude: /node_modules/,
-        use: [
-          'style-loader',
-          {
-            loader: 'css-loader',
-            options: {
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'postcss-loader',
-            options: {
-              plugins: () => [require('autoprefixer')],
-              sourceMap: true,
-            },
-          },
-          {
-            loader: 'sass-loader',
-            options: {
-              includePaths: [path.resolve(__dirname, 'src', 'scss')],
-              sourceMap: true,
-            },
-          },
-        ],
+        test: /(\.css)$/,
+        loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader'],
       },
     ],
   },

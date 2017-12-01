@@ -24,6 +24,20 @@ body {
   font-size: 12px;
   color: red;
   position: relative;
-
   top: -3px;
+}
+
+.highlight {
+  background: #fd5a1e;
+  color: #fff;
+  padding: 0 1px;
+  margin: 0 1px;
+  border-radius: 2px;
+}
+
+.table-div {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 2px #ddd;
 }
