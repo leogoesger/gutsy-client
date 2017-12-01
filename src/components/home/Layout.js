@@ -1,8 +1,10 @@
 import React from 'react';
+import {debounce} from 'lodash';
 import PropTypes from 'prop-types';
 import Highlight from 'react-highlighter';
 import TextField from 'material-ui/TextField';
 import Search from 'material-ui/svg-icons/action/search';
+
 import {Styles} from '../../styles/Styles';
 import {Colors} from '../../styles/Colors';
 
@@ -14,6 +16,7 @@ import {
   TableRow,
   TableRowColumn,
 } from 'material-ui/Table';
+import {navigateTo} from '../../utils/helpers';
 
 import Header from '../../containers/Header';
 
@@ -24,16 +27,26 @@ export default class Layout extends React.Component {
       searchText: '',
     };
   }
-  _renderTable(customers) {
-    if (customers && customers.length) {
+
+  _updateResults(searchText) {
+    this.setState({searchText});
+    this.props.fetchRoutes(this.state.searchText);
+  }
+
+  _navigateToDetails(routeId) {
+    navigateTo(`/routes/${routeId}`);
+  }
+
+  _renderTable(routes) {
+    if (routes && routes.length) {
       return (
         <div className="table-div">
           <Table
             selectable={false}
             fixedHeader={true}
-            height={customers.length > 12 ? '560px' : null}
+            height={routes.length > 12 ? '560px' : null}
             onCellClick={rowNumber =>
-              this._navigateToDetails(customers[rowNumber].id)}
+              this._navigateToDetails(routes[rowNumber].id)}
           >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
@@ -41,17 +54,17 @@ export default class Layout extends React.Component {
                   {'Name'}
                 </TableHeaderColumn>
                 <TableHeaderColumn style={{width: '20%'}}>
-                  {'Contact Info'}
+                  {'Grade'}
                 </TableHeaderColumn>
                 <TableHeaderColumn style={{width: '20%'}}>
                   {'Location'}
                 </TableHeaderColumn>
                 <TableHeaderColumn style={{width: '40%'}}>
-                  {'License(s)'}
+                  {'Description'}
                 </TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            {this._renderCustomersList(customers)}
+            {this._renderCustomersList(routes)}
           </Table>
         </div>
       );
@@ -59,33 +72,42 @@ export default class Layout extends React.Component {
     return null;
   }
 
-  _renderCustomersList(customers) {
+  _renderCustomersList(routes) {
     return (
       <TableBody displayRowCheckbox={false} showRowHover={true}>
-        {this._renderListItems(customers)}
+        {this._renderListItems(routes)}
       </TableBody>
     );
   }
 
-  _renderListItems(customers) {
-    return customers.map(customer => {
+  _renderDescription(route) {
+    if (!route.description) {
+      return 'No available description';
+    }
+    return (
+      <Highlight matchElement={'span'} search={this.state.searchText}>
+        {route.description}
+      </Highlight>
+    );
+  }
+
+  _renderListItems(routes) {
+    return routes.map(route => {
       return (
-        <TableRow rowNumber={customer.id} key={customer.id}>
+        <TableRow rowNumber={route.id} key={route.id}>
           <TableRowColumn style={{width: '20%'}}>
             <Highlight matchElement={'span'} search={this.state.searchText}>
-              {`${customer.lastName}, ${customer.firstName}`}
+              {route.name}
             </Highlight>
           </TableRowColumn>
           <TableRowColumn style={{width: '20%'}}>
-            <Highlight matchElement={'span'} search={this.state.searchText}>
-              {this._renderContacts(customer)}
-            </Highlight>
+            {`${route.grade}`}
           </TableRowColumn>
           <TableRowColumn style={{width: '20%'}}>
-            {this._renderLocation(customer)}
+            {'Bishop Town'}
           </TableRowColumn>
           <TableRowColumn style={{width: '40%'}}>
-            {this._renderLicenses(customer.licenses)}
+            {this._renderDescription(route)}
           </TableRowColumn>
         </TableRow>
       );
@@ -94,10 +116,10 @@ export default class Layout extends React.Component {
 
   render() {
     return (
-      <div className="main-container">
+      <div>
         <Header currentUser={this.props.currentUser} />
-        <div className="customer-area background-data-cover">
-          <div className="row searchbox" style={styles.searchBox}>
+        <div style={{marginTop: '120px'}}>
+          <div className="row" style={styles.searchBox}>
             <div className="col-xs-1">
               <div className="box">
                 <Search style={styles.icon} color={Colors.darkPink} />
@@ -108,7 +130,7 @@ export default class Layout extends React.Component {
                 <TextField
                   style={{margin: '0 !important'}}
                   autoFocus={true}
-                  floatingLabelText="Search for user by License #, Email Address, First Name, Last Name, City, or Phone #"
+                  floatingLabelText="Search for routes, areas, regions by name or description"
                   value={this.state.searchText}
                   onChange={(_event, value) => this._updateResults(value)}
                   underlineFocusStyle={styles.underlineFocusStyle}

@@ -3,20 +3,20 @@ import {RouteTypes as types} from '../action-types';
 
 const fetchRoutesObject = () => {
   return {
-    types: types.FETCH_ROUTES,
+    type: types.FETCH_ROUTES_OBJECT,
   };
 };
 
 const fetchRoutesSuccess = routes => {
   return {
-    types: types.FETCH_ROUTES_SUCCESS,
+    type: types.FETCH_ROUTES_SUCCESS,
     routes,
   };
 };
 
 const fetchRoutesFail = error => {
   return {
-    types: types.FETCH_ROUTES_FAIL,
+    type: types.FETCH_ROUTES_FAIL,
     error,
   };
 };
@@ -27,12 +27,12 @@ export function fetchRoutes(searchText) {
   return async dispatch => {
     try {
       dispatch(fetchRoutesObject());
-      const routes = await await request
-        .post(`${url}/search-routes`)
+      const routesResponse = await request
+        .post(`${url}/api/search-routes`)
         .send({name: searchText});
-      dispatch(fetchRoutesSuccess(routes));
+      dispatch(fetchRoutesSuccess(routesResponse.body));
     } catch (e) {
-      e => dispatch(fetchRoutesFail(e));
+      e => dispatch(fetchRoutesFail(e.response.body));
     }
   };
 }
