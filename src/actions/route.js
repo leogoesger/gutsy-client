@@ -26,11 +26,14 @@ const url = 'http://localhost:8000';
 export function fetchRoutes(searchText) {
   return async dispatch => {
     try {
-      dispatch(fetchRoutesObject());
-      const routesResponse = await request
-        .post(`${url}/api/search-routes`)
-        .send({name: searchText});
-      dispatch(fetchRoutesSuccess(routesResponse.body));
+      if (searchText) {
+        const routesResponse = await request
+          .post(`${url}/api/search-routes`)
+          .send({name: searchText});
+        dispatch(fetchRoutesSuccess(routesResponse.body));
+      } else {
+        dispatch(fetchRoutesObject());
+      }
     } catch (e) {
       e => dispatch(fetchRoutesFail(e.response.body));
     }

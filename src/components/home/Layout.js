@@ -26,11 +26,15 @@ export default class Layout extends React.Component {
     this.state = {
       searchText: '',
     };
+    this._debouncedSearch = debounce(
+      () => this.props.fetchRoutes(this.state.searchText),
+      300
+    );
   }
 
   _updateResults(searchText) {
     this.setState({searchText});
-    this.props.fetchRoutes(this.state.searchText);
+    this._debouncedSearch();
   }
 
   _navigateToDetails(routeId) {
@@ -40,7 +44,7 @@ export default class Layout extends React.Component {
   _renderTable(routes) {
     if (routes && routes.length) {
       return (
-        <div className="table-div">
+        <div className="table-div" style={{width: '75%'}}>
           <Table
             selectable={false}
             fixedHeader={true}
@@ -162,6 +166,7 @@ const styles = {
     margin: '20px auto',
     border: '1px solid #ddd',
     boxShadow: '2px 2px 2px #ddd',
+    width: '75%',
   },
   buttonBox: {
     maxWidth: '1200px',

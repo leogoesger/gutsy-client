@@ -34,3 +34,10 @@ body {
   margin: 0 1px;
   border-radius: 2px;
 }
+
+.table-div {
+  max-width: 1200px;
+  margin: 0 auto;
+  border: 1px solid #ddd;
+  box-shadow: 2px 2px 2px #ddd;
+}
