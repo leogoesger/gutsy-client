@@ -21,14 +21,12 @@ const fetchRoutesFail = error => {
   };
 };
 
-const url = 'http://localhost:8000';
-
 export function fetchRoutes(searchText) {
   return async dispatch => {
     try {
       if (searchText) {
         const routesResponse = await request
-          .post(`${url}/api/search-routes`)
+          .post(`${process.env.SERVER_ADDRESS}/api/search-routes`)
           .send({name: searchText});
         dispatch(fetchRoutesSuccess(routesResponse.body));
       } else {

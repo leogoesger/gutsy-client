@@ -5,6 +5,7 @@ import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
 import path from 'path';
+import DotenvPlugin from 'webpack-dotenv-plugin';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -24,6 +25,11 @@ export default {
     filename: '[name].[chunkhash].js',
   },
   plugins: [
+    new DotenvPlugin({
+      sample: './.env.default',
+      path: './.env.prod',
+    }),
+
     // Hash the files using MD5 so that their names change when the content changes.
     new WebpackMd5Hash(),
 

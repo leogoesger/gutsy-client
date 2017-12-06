@@ -1,24 +1,15 @@
 import React from 'react';
 import {debounce} from 'lodash';
 import PropTypes from 'prop-types';
-import Highlight from 'react-highlighter';
 import TextField from 'material-ui/TextField';
 import Search from 'material-ui/svg-icons/action/search';
 
 import {Styles} from '../../styles/Styles';
 import {Colors} from '../../styles/Colors';
-
-import {
-  Table,
-  TableBody,
-  TableHeader,
-  TableHeaderColumn,
-  TableRow,
-  TableRowColumn,
-} from 'material-ui/Table';
-import {navigateTo} from '../../utils/helpers';
-
 import Header from '../../containers/Header';
+import RouteCard from './RouteCard';
+import RegionCard from './RegionCard';
+import AreaCard from './AreaCard';
 
 export default class Layout extends React.Component {
   constructor(props) {
@@ -27,7 +18,7 @@ export default class Layout extends React.Component {
       searchText: '',
     };
     this._debouncedSearch = debounce(
-      () => this.props.fetchRoutes(this.state.searchText),
+      () => this.props.fetchInfo(this.state.searchText),
       300
     );
   }
@@ -35,87 +26,6 @@ export default class Layout extends React.Component {
   _updateResults(searchText) {
     this.setState({searchText});
     this._debouncedSearch();
-  }
-
-  _navigateToDetails(routeId) {
-    navigateTo(`/routes/${routeId}`);
-  }
-
-  _renderTable(routes) {
-    if (routes && routes.length) {
-      return (
-        <div className="table-div" style={{width: '75%'}}>
-          <Table
-            selectable={false}
-            fixedHeader={true}
-            height={routes.length > 12 ? '560px' : null}
-            onCellClick={rowNumber =>
-              this._navigateToDetails(routes[rowNumber].id)}
-          >
-            <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
-              <TableRow>
-                <TableHeaderColumn style={{width: '20%'}}>
-                  {'Name'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '20%'}}>
-                  {'Grade'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '20%'}}>
-                  {'Location'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '40%'}}>
-                  {'Description'}
-                </TableHeaderColumn>
-              </TableRow>
-            </TableHeader>
-            {this._renderCustomersList(routes)}
-          </Table>
-        </div>
-      );
-    }
-    return null;
-  }
-
-  _renderCustomersList(routes) {
-    return (
-      <TableBody displayRowCheckbox={false} showRowHover={true}>
-        {this._renderListItems(routes)}
-      </TableBody>
-    );
-  }
-
-  _renderDescription(route) {
-    if (!route.description) {
-      return 'No available description';
-    }
-    return (
-      <Highlight matchElement={'span'} search={this.state.searchText}>
-        {route.description}
-      </Highlight>
-    );
-  }
-
-  _renderListItems(routes) {
-    return routes.map(route => {
-      return (
-        <TableRow rowNumber={route.id} key={route.id}>
-          <TableRowColumn style={{width: '20%'}}>
-            <Highlight matchElement={'span'} search={this.state.searchText}>
-              {route.name}
-            </Highlight>
-          </TableRowColumn>
-          <TableRowColumn style={{width: '20%'}}>
-            {`${route.grade}`}
-          </TableRowColumn>
-          <TableRowColumn style={{width: '20%'}}>
-            {'Bishop Town'}
-          </TableRowColumn>
-          <TableRowColumn style={{width: '40%'}}>
-            {this._renderDescription(route)}
-          </TableRowColumn>
-        </TableRow>
-      );
-    });
   }
 
   render() {
@@ -147,7 +57,18 @@ export default class Layout extends React.Component {
               </div>
             </div>
           </div>
-          {this._renderTable(this.props.routes)}
+          <RouteCard
+            routes={this.props.routes}
+            searchText={this.state.searchText}
+          />
+          <RegionCard
+            regions={this.props.regions}
+            searchText={this.state.searchText}
+          />
+          <AreaCard
+            areas={this.props.areas}
+            searchText={this.state.searchText}
+          />
         </div>
       </div>
     );
@@ -156,8 +77,10 @@ export default class Layout extends React.Component {
 
 Layout.propTypes = {
   currentUser: PropTypes.object,
+  fetchInfo: PropTypes.func.isRequired,
   routes: PropTypes.array,
-  fetchRoutes: PropTypes.func.isRequired,
+  areas: PropTypes.array,
+  regions: PropTypes.array,
 };
 
 const styles = {
