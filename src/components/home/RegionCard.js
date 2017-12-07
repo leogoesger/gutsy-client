@@ -10,6 +10,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
+import {Theme} from '../../styles/Theme';
 import {navigateTo} from '../../utils/helpers';
 
 export default class RegionCard extends React.Component {
@@ -48,11 +49,7 @@ export default class RegionCard extends React.Component {
     if (!region.description) {
       return 'No available description';
     }
-    return (
-      <Highlight matchElement={'span'} search={this.props.searchText}>
-        {region.description}
-      </Highlight>
-    );
+    return region.description;
   }
 
   _navigateToDetails(regionId) {
@@ -72,14 +69,8 @@ export default class RegionCard extends React.Component {
           >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
-                <TableHeaderColumn style={{width: '30%'}}>
-                  {'Name'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '30%'}}>
-                  {'Location'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '40%'}}>
-                  {'Description'}
+                <TableHeaderColumn style={styles.tableHeaderColumn}>
+                  {'Regions'}
                 </TableHeaderColumn>
               </TableRow>
             </TableHeader>
@@ -95,4 +86,12 @@ export default class RegionCard extends React.Component {
 RegionCard.propTypes = {
   regions: PropTypes.array,
   searchText: PropTypes.string,
+};
+
+const styles = {
+  tableHeaderColumn: {
+    width: '20%',
+    fontWeight: Theme.light,
+    fontSize: Theme.subTitle,
+  },
 };

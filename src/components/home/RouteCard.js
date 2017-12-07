@@ -10,6 +10,7 @@ import {
   TableRowColumn,
 } from 'material-ui/Table';
 
+import {Theme} from '../../styles/Theme';
 import {navigateTo} from '../../utils/helpers';
 
 export default class RouteCard extends React.Component {
@@ -51,11 +52,7 @@ export default class RouteCard extends React.Component {
     if (!route.description) {
       return 'No available description';
     }
-    return (
-      <Highlight matchElement={'span'} search={this.props.searchText}>
-        {route.description}
-      </Highlight>
-    );
+    return route.description;
   }
 
   _navigateToDetails(routeId) {
@@ -75,17 +72,8 @@ export default class RouteCard extends React.Component {
           >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
-                <TableHeaderColumn style={{width: '20%'}}>
-                  {'Name'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '20%'}}>
-                  {'Grade'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '20%'}}>
-                  {'Location'}
-                </TableHeaderColumn>
-                <TableHeaderColumn style={{width: '40%'}}>
-                  {'Description'}
+                <TableHeaderColumn style={styles.tableHeaderColumn}>
+                  {'Routes'}
                 </TableHeaderColumn>
               </TableRow>
             </TableHeader>
@@ -101,4 +89,12 @@ export default class RouteCard extends React.Component {
 RouteCard.propTypes = {
   routes: PropTypes.array,
   searchText: PropTypes.string,
+};
+
+const styles = {
+  tableHeaderColumn: {
+    width: '20%',
+    fontWeight: Theme.light,
+    fontSize: Theme.subTitle,
+  },
 };
