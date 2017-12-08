@@ -93,8 +93,9 @@ RouteCard.propTypes = {
 
 const styles = {
   tableHeaderColumn: {
+    height: '16px',
     width: '20%',
     fontWeight: Theme.light,
-    fontSize: Theme.subTitle,
+    fontSize: Theme.smallTitle,
   },
 };

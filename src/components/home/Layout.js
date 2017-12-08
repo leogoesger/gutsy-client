@@ -19,7 +19,7 @@ export default class Layout extends React.Component {
     };
     this._debouncedSearch = debounce(
       () => this.props.fetchInfo(this.state.searchText),
-      300
+      100
     );
   }
 
