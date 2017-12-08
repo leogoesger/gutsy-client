@@ -1,14 +1,23 @@
 import UserAccountTypes from './user-account';
 import RouteTypes from './route';
-import AreaTypes from './area';
 import RegionTypes from './region';
+import SubregionTypes from './subregion';
+import AreaTypes from './area';
+import SubareaTypes from './subarea';
 
 export {UserAccountTypes};
 export {RouteTypes};
-export {AreaTypes};
+
 export {RegionTypes};
+export {SubregionTypes};
+export {AreaTypes};
+export {SubareaTypes};
 
 export default {
   UserAccountTypes,
   RouteTypes,
+  RegionTypes,
+  SubregionTypes,
+  AreaTypes,
+  SubareaTypes,
 };
