@@ -37,7 +37,12 @@ body {
 
 .table-div {
   max-width: 1200px;
-  margin: 0 auto;
+  margin: 20px auto;
   border: 1px solid #ddd;
   box-shadow: 2px 2px 2px #ddd;
+}
+
+.grade {
+  font-weight: 600;
+  font-size: 14px;
 }

@@ -21,14 +21,32 @@ const fetchRoutesFail = error => {
   };
 };
 
-const url = 'http://localhost:8000';
+const fetchRouteObject = () => {
+  return {
+    type: types.FETCH_ROUTE_OBJECT,
+  };
+};
+
+const fetchRouteSuccess = route => {
+  return {
+    type: types.FETCH_ROUTE_SUCCESS,
+    route,
+  };
+};
+
+const fetchRouteFail = error => {
+  return {
+    type: types.FETCH_ROUTE_FAIL,
+    error,
+  };
+};
 
 export function fetchRoutes(searchText) {
   return async dispatch => {
     try {
       if (searchText) {
         const routesResponse = await request
-          .post(`${url}/api/search-routes`)
+          .post(`${process.env.SERVER_ADDRESS}/api/search-routes`)
           .send({name: searchText});
         dispatch(fetchRoutesSuccess(routesResponse.body));
       } else {
@@ -36,6 +54,23 @@ export function fetchRoutes(searchText) {
       }
     } catch (e) {
       e => dispatch(fetchRoutesFail(e.response.body));
+    }
+  };
+}
+
+export function fetchRoute(routeId) {
+  return async dispatch => {
+    try {
+      if (routeId) {
+        const routeResponse = await request.get(
+          `${process.env.SERVER_ADDRESS}/api/routes/${routeId}`
+        );
+        dispatch(fetchRouteSuccess(routeResponse.body));
+      } else {
+        dispatch(fetchRouteObject());
+      }
+    } catch (e) {
+      e => dispatch(fetchRouteFail(e.response.body));
     }
   };
 }

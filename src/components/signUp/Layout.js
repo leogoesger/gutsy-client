@@ -28,6 +28,7 @@ export default class Layout extends React.Component {
       });
     }
   }
+
   _handleMessageClose() {
     this.setState({showMessage: false, message: ''});
   }
@@ -35,7 +36,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header currentUser={this.props.currentUser} />
+        <Header />
         <UserDetailCard
           signUpUser={userData => this.props.signUpUser(userData)}
         />
@@ -55,6 +56,5 @@ export default class Layout extends React.Component {
 
 Layout.propTypes = {
   signUpUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.object,
   message: PropTypes.string,
 };

@@ -9,7 +9,6 @@ export const Theme = {
 
   bodyText: '14px',
   smallText: '12px',
-
   lineHeight: '24px',
 
   // Button Config
@@ -19,4 +18,8 @@ export const Theme = {
   buttonLabelSize: '16px',
   buttonLabelSmaller: '14px',
   buttonLabelSmallest: '12px',
+
+  light: '400',
+  medium: '600',
+  dark: '800',
 };

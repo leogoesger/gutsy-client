@@ -3,7 +3,6 @@ import PropTypes from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 
 import Header from '../../containers/Header';
-import LoginCard from './LoginCard';
 import {autoHideDuration} from '../../utils/constants';
 
 export default class Layout extends React.Component {
@@ -28,6 +27,7 @@ export default class Layout extends React.Component {
       });
     }
   }
+
   _handleMessageClose() {
     this.setState({showMessage: false, message: ''});
   }
@@ -36,7 +36,6 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Header />
-        <LoginCard loginUser={userData => this.props.loginUser(userData)} />
         <Snackbar
           style={{color: 'black'}}
           open={this.state.showMessage}
@@ -52,6 +51,6 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  loginUser: PropTypes.func.isRequired,
+  route: PropTypes.object,
   message: PropTypes.string,
 };

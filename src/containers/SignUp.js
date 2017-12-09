@@ -9,7 +9,6 @@ export class SignUp extends React.Component {
   render() {
     return (
       <Layout
-        currentUser={this.props.currentUser}
         signUpUser={userData => this.props.signUpUser(userData)}
         message={this.props.message}
       />
@@ -19,13 +18,11 @@ export class SignUp extends React.Component {
 
 SignUp.propTypes = {
   signUpUser: PropTypes.func.isRequired,
-  currentUser: PropTypes.object,
   message: PropTypes.string,
 };
 
 const mapStateToProps = state => {
   return {
-    currentUser: state.userAccount.currentUser,
     message: state.userAccount.signUpErrorMessage,
   };
 };

@@ -3,15 +3,19 @@ import {routerReducer} from 'react-router-redux';
 
 import userAccount from './user-account';
 import route from './route';
-import area from './area';
 import region from './region';
+import subregion from './subregion';
+import area from './area';
+import subarea from './subarea';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
   route,
   userAccount,
-  area,
   region,
+  subregion,
+  area,
+  subarea,
 });
 
 export default rootReducer;

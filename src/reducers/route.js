@@ -20,6 +20,15 @@ export default function(state: STATE = initialState, action: ACTION) {
     case types.FETCH_ROUTES_FAIL:
       return objectAssign({}, state, {error: action.error});
 
+    case types.FETCH_ROUTE_OBJECT:
+      return objectAssign({}, state, {route: null});
+
+    case types.FETCH_ROUTE_SUCCESS:
+      return objectAssign({}, state, {route: action.route});
+
+    case types.FETCH_ROUTE_FAIL:
+      return objectAssign({}, state, {error: action.error});
+
     default:
       return state;
   }
