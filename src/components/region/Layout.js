@@ -5,6 +5,8 @@ import Snackbar from 'material-ui/Snackbar';
 import Header from '../../containers/Header';
 import {autoHideDuration} from '../../utils/constants';
 
+import RegionCard from './RegionCard';
+
 export default class Layout extends React.Component {
   constructor(props) {
     super(props);
@@ -36,6 +38,7 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Header />
+        <RegionCard region={this.props.region} />
         <Snackbar
           style={{color: 'black'}}
           open={this.state.showMessage}
@@ -51,6 +54,6 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  route: PropTypes.object,
+  region: PropTypes.object,
   message: PropTypes.string,
 };

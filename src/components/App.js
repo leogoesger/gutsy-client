@@ -10,6 +10,10 @@ import Home from '../containers/Home';
 import SignUp from '../containers/SignUp';
 import Login from '../containers/Login';
 import Climb from '../containers/Climb';
+import Subarea from '../containers/Subarea';
+import Area from '../containers/Area';
+import Subregion from '../containers/Subregion';
+import Region from '../containers/Region';
 
 class App extends React.Component {
   render() {
@@ -24,7 +28,11 @@ class App extends React.Component {
             <Route exact path="/" component={Home} />
             <Route exact path="/signUp" component={SignUp} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/route/:id" component={Climb} />
+            <Route exact path="/climbs/:id" component={Climb} />
+            <Route exact path="/subareas/:id" component={Subarea} />
+            <Route exact path="/areas/:id" component={Area} />
+            <Route exact path="/subregions/:id" component={Subregion} />
+            <Route exact path="/regions/:id" component={Region} />
           </Switch>
         </MuiThemeProvider>
       </div>

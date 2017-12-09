@@ -21,6 +21,26 @@ const fetchSubregionsFail = error => {
   };
 };
 
+const fetchSubregionObject = () => {
+  return {
+    type: types.FETCH_SUBREGION_OBJECT,
+  };
+};
+
+const fetchSubregionSuccess = climb => {
+  return {
+    type: types.FETCH_SUBREGION_SUCCESS,
+    climb,
+  };
+};
+
+const fetchSubregionFail = error => {
+  return {
+    type: types.FETCH_SUBREGION_FAIL,
+    error,
+  };
+};
+
 export function fetchSubregions(searchText) {
   return async dispatch => {
     try {
@@ -34,6 +54,23 @@ export function fetchSubregions(searchText) {
       }
     } catch (e) {
       e => dispatch(fetchSubregionsFail(e.response.body));
+    }
+  };
+}
+
+export function fetchSubregion(subregionId) {
+  return async dispatch => {
+    try {
+      if (subregionId) {
+        const subregionResponse = await request.get(
+          `${process.env.SERVER_ADDRESS}/api/subregions/${subregionId}`
+        );
+        dispatch(fetchSubregionSuccess(subregionResponse.body));
+      } else {
+        dispatch(fetchSubregionObject());
+      }
+    } catch (e) {
+      e => dispatch(fetchSubregionFail(e.response.body));
     }
   };
 }

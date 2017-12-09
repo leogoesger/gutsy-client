@@ -17,58 +17,58 @@ export default class RouteCard extends React.Component {
   constructor(props) {
     super(props);
   }
-  _renderRoutesList(routes) {
+  _navigateToDetails(climbId) {
+    navigateTo(`/climbs/${climbId}`);
+  }
+
+  _renderRoutesList(climbs) {
     return (
       <TableBody displayRowCheckbox={false} showRowHover={true}>
-        {this._renderListItems(routes)}
+        {this._renderListItems(climbs)}
       </TableBody>
     );
   }
 
-  _renderListItems(routes) {
-    return routes.map(route => {
+  _renderListItems(climbs) {
+    return climbs.map(climb => {
       return (
-        <TableRow rowNumber={route.id} key={route.id}>
+        <TableRow rowNumber={climb.id} key={climb.id}>
           <TableRowColumn style={{width: '25%'}}>
             <Highlight matchElement={'span'} search={this.props.searchText}>
-              {`${route.name}, `}
+              {`${climb.name}, `}
             </Highlight>
-            <span className="grade">{route.grade}</span>
+            <span className="grade">{climb.grade}</span>
           </TableRowColumn>
           <TableRowColumn style={{width: '35%'}}>
-            {`${route.subarea.name} < ${route.subarea.area.name} < ${route
-              .subarea.area.subregion.name} < ${route.subarea.area.subregion
+            {`${climb.subarea.name} < ${climb.subarea.area.name} < ${climb
+              .subarea.area.subregion.name} < ${climb.subarea.area.subregion
               .region.name}`}
           </TableRowColumn>
           <TableRowColumn style={{width: '40%'}}>
-            {this._renderDescription(route)}
+            {this._renderDescription(climb)}
           </TableRowColumn>
         </TableRow>
       );
     });
   }
 
-  _renderDescription(route) {
-    if (!route.description) {
+  _renderDescription(climb) {
+    if (!climb.description) {
       return 'No available description';
     }
-    return route.description;
-  }
-
-  _navigateToDetails(routeId) {
-    navigateTo(`/routes/${routeId}`);
+    return climb.description;
   }
 
   render() {
-    if (this.props.routes && this.props.routes.length) {
+    if (this.props.climbs && this.props.climbs.length) {
       return (
         <div className="table-div" style={{width: '75%'}}>
           <Table
             selectable={false}
             fixedHeader={true}
-            height={this.props.routes.length > 6 ? '350px' : null}
+            height={this.props.climbs.length > 6 ? '350px' : null}
             onCellClick={rowNumber =>
-              this._navigateToDetails(this.props.routes[rowNumber].id)}
+              this._navigateToDetails(this.props.climbs[rowNumber].id)}
           >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
@@ -77,7 +77,7 @@ export default class RouteCard extends React.Component {
                 </TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            {this._renderRoutesList(this.props.routes)}
+            {this._renderRoutesList(this.props.climbs)}
           </Table>
         </div>
       );
@@ -87,7 +87,7 @@ export default class RouteCard extends React.Component {
 }
 
 RouteCard.propTypes = {
-  routes: PropTypes.array,
+  climbs: PropTypes.array,
   searchText: PropTypes.string,
 };
 
