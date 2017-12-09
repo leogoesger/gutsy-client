@@ -11,13 +11,13 @@ const initialState: STATE = {
 
 export default function(state: STATE = initialState, action: ACTION) {
   switch (action.type) {
-    case types.FETCH_AREAS_OBJECT:
+    case types.FETCH_SUBAREAS_OBJECT:
       return objectAssign({}, state, {subareas: null});
 
-    case types.FETCH_AREAS_SUCCESS:
+    case types.FETCH_SUBAREAS_SUCCESS:
       return objectAssign({}, state, {subareas: action.subareas});
 
-    case types.FETCH_AREAS_FAIL:
+    case types.FETCH_SUBAREAS_FAIL:
       return objectAssign({}, state, {error: action.error});
 
     default:

@@ -7,10 +7,10 @@ const fetchSubregionsObject = () => {
   };
 };
 
-const fetchSubregionsSuccess = regions => {
+const fetchSubregionsSuccess = subregions => {
   return {
     type: types.FETCH_SUBREGIONS_SUCCESS,
-    regions,
+    subregions,
   };
 };
 
@@ -25,10 +25,10 @@ export function fetchSubregions(searchText) {
   return async dispatch => {
     try {
       if (searchText) {
-        const regionsResponse = await request
+        const subregionsResponse = await request
           .post(`${process.env.SERVER_ADDRESS}/api/search-subregions`)
           .send({name: searchText});
-        dispatch(fetchSubregionsSuccess(regionsResponse.body));
+        dispatch(fetchSubregionsSuccess(subregionsResponse.body));
       } else {
         dispatch(fetchSubregionsObject());
       }

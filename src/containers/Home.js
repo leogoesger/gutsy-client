@@ -34,21 +34,15 @@ export class Home extends React.Component {
   render() {
     return (
       <Layout
-        currentUser={this.props.currentUser}
         fetchInfo={searchText => this._fetchInfo(searchText)}
         routes={this.props.routes}
-        locationInfo={this._joinLocations()}
-        regions={this.props.regions}
-        subregions={this.props.subregions}
-        areas={this.props.areas}
-        subareas={this.props.subareas}
+        location={this._joinLocations()}
       />
     );
   }
 }
 
 Home.propTypes = {
-  currentUser: PropTypes.object,
   routes: PropTypes.array,
   areas: PropTypes.array,
   subareas: PropTypes.array,
@@ -68,7 +62,6 @@ const mapStateToProps = state => {
     subregions: state.subregion.subregions,
     areas: state.area.areas,
     subareas: state.subarea.subareas,
-    currentUser: state.userAccount.currentUser,
   };
 };
 

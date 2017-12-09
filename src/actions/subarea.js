@@ -7,10 +7,10 @@ const fetchSubareasObject = () => {
   };
 };
 
-const fetchSubareasSuccess = areas => {
+const fetchSubareasSuccess = subareas => {
   return {
     type: types.FETCH_SUBAREAS_SUCCESS,
-    areas,
+    subareas,
   };
 };
 
@@ -25,10 +25,10 @@ export function fetchSubareas(searchText) {
   return async dispatch => {
     try {
       if (searchText) {
-        const areasResponse = await request
+        const subareasResponse = await request
           .post(`${process.env.SERVER_ADDRESS}/api/search-subareas`)
           .send({name: searchText});
-        dispatch(fetchSubareasSuccess(areasResponse.body));
+        dispatch(fetchSubareasSuccess(subareasResponse.body));
       } else {
         dispatch(fetchSubareasObject());
       }

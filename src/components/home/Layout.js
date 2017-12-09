@@ -8,8 +8,7 @@ import {Styles} from '../../styles/Styles';
 import {Colors} from '../../styles/Colors';
 import Header from '../../containers/Header';
 import RouteCard from './RouteCard';
-import RegionCard from './RegionCard';
-import AreaCard from './AreaCard';
+import LocationCard from './LocationCard';
 
 export default class Layout extends React.Component {
   constructor(props) {
@@ -31,7 +30,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header currentUser={this.props.currentUser} />
+        <Header />
         <div style={{marginTop: '120px'}}>
           <div className="row" style={styles.searchBox}>
             <div className="col-xs-1">
@@ -61,12 +60,8 @@ export default class Layout extends React.Component {
             routes={this.props.routes}
             searchText={this.state.searchText}
           />
-          <RegionCard
-            regions={this.props.regions}
-            searchText={this.state.searchText}
-          />
-          <AreaCard
-            areas={this.props.areas}
+          <LocationCard
+            location={this.props.location}
             searchText={this.state.searchText}
           />
         </div>
@@ -76,11 +71,9 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  currentUser: PropTypes.object,
   fetchInfo: PropTypes.func.isRequired,
   routes: PropTypes.array,
-  areas: PropTypes.array,
-  regions: PropTypes.array,
+  location: PropTypes.array,
 };
 
 const styles = {

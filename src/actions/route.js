@@ -21,6 +21,26 @@ const fetchRoutesFail = error => {
   };
 };
 
+const fetchRouteObject = () => {
+  return {
+    type: types.FETCH_ROUTE_OBJECT,
+  };
+};
+
+const fetchRouteSuccess = route => {
+  return {
+    type: types.FETCH_ROUTE_SUCCESS,
+    route,
+  };
+};
+
+const fetchRouteFail = error => {
+  return {
+    type: types.FETCH_ROUTE_FAIL,
+    error,
+  };
+};
+
 export function fetchRoutes(searchText) {
   return async dispatch => {
     try {
@@ -34,6 +54,23 @@ export function fetchRoutes(searchText) {
       }
     } catch (e) {
       e => dispatch(fetchRoutesFail(e.response.body));
+    }
+  };
+}
+
+export function fetchRoute(routeId) {
+  return async dispatch => {
+    try {
+      if (routeId) {
+        const routeResponse = await request.get(
+          `${process.env.SERVER_ADDRESS}/api/routes/${routeId}`
+        );
+        dispatch(fetchRouteSuccess(routeResponse.body));
+      } else {
+        dispatch(fetchRouteObject());
+      }
+    } catch (e) {
+      e => dispatch(fetchRouteFail(e.response.body));
     }
   };
 }

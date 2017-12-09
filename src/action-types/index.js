@@ -7,7 +7,6 @@ import SubareaTypes from './subarea';
 
 export {UserAccountTypes};
 export {RouteTypes};
-
 export {RegionTypes};
 export {SubregionTypes};
 export {AreaTypes};

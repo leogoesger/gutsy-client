@@ -29,16 +29,16 @@ export default class RouteCard extends React.Component {
     return routes.map(route => {
       return (
         <TableRow rowNumber={route.id} key={route.id}>
-          <TableRowColumn style={{width: '20%'}}>
+          <TableRowColumn style={{width: '25%'}}>
             <Highlight matchElement={'span'} search={this.props.searchText}>
-              {route.name}
+              {`${route.name}, `}
             </Highlight>
+            <span className="grade">{route.grade}</span>
           </TableRowColumn>
-          <TableRowColumn style={{width: '20%'}}>
-            {`${route.grade}`}
-          </TableRowColumn>
-          <TableRowColumn style={{width: '20%'}}>
-            {'Bishop Town'}
+          <TableRowColumn style={{width: '35%'}}>
+            {`${route.subarea.name} < ${route.subarea.area.name} < ${route
+              .subarea.area.subregion.name} < ${route.subarea.area.subregion
+              .region.name}`}
           </TableRowColumn>
           <TableRowColumn style={{width: '40%'}}>
             {this._renderDescription(route)}
@@ -66,7 +66,7 @@ export default class RouteCard extends React.Component {
           <Table
             selectable={false}
             fixedHeader={true}
-            height={this.props.routes.length > 12 ? '560px' : null}
+            height={this.props.routes.length > 6 ? '350px' : null}
             onCellClick={rowNumber =>
               this._navigateToDetails(this.props.routes[rowNumber].id)}
           >
