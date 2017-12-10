@@ -21,6 +21,26 @@ const fetchAreasFail = error => {
   };
 };
 
+const fetchAreaObject = () => {
+  return {
+    type: types.FETCH_AREA_OBJECT,
+  };
+};
+
+const fetchAreaSuccess = area => {
+  return {
+    type: types.FETCH_AREA_SUCCESS,
+    area,
+  };
+};
+
+const fetchAreaFail = error => {
+  return {
+    type: types.FETCH_AREA_FAIL,
+    error,
+  };
+};
+
 export function fetchAreas(searchText) {
   return async dispatch => {
     try {
@@ -34,6 +54,23 @@ export function fetchAreas(searchText) {
       }
     } catch (e) {
       e => dispatch(fetchAreasFail(e.response.body));
+    }
+  };
+}
+
+export function fetchArea(areaId) {
+  return async dispatch => {
+    try {
+      if (areaId) {
+        const areaResponse = await request.get(
+          `${process.env.SERVER_ADDRESS}/api/areas/${areaId}`
+        );
+        dispatch(fetchAreaSuccess(areaResponse.body));
+      } else {
+        dispatch(fetchAreaObject());
+      }
+    } catch (e) {
+      e => dispatch(fetchAreaFail(e.response.body));
     }
   };
 }

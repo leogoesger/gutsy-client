@@ -24,7 +24,7 @@ export default class Layout extends React.Component {
             icon={<Person />}
             style={styles.headerLogInButton}
             labelStyle={Buttons.buttonLabelSize}
-            onClick={() => this.props.logOutUser()}
+            onClick={() => navigateTo('/user')}
           />
         </div>
       );

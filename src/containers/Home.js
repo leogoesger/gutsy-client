@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 import {concat, compact} from 'lodash';
 
-import {fetchRoutes} from '../actions/route';
+import {fetchClimbs} from '../actions/climb';
 import {fetchAreas} from '../actions/area';
 import {fetchSubareas} from '../actions/subarea';
 import {fetchRegions} from '../actions/region';
@@ -13,7 +13,7 @@ import Layout from '../components/home/Layout';
 
 export class Home extends React.Component {
   _fetchInfo(searchText) {
-    this.props.fetchRoutes(searchText);
+    this.props.fetchClimbs(searchText);
     this.props.fetchAreas(searchText);
     this.props.fetchSubareas(searchText);
     this.props.fetchRegions(searchText);
@@ -35,7 +35,7 @@ export class Home extends React.Component {
     return (
       <Layout
         fetchInfo={searchText => this._fetchInfo(searchText)}
-        routes={this.props.routes}
+        climbs={this.props.climbs}
         location={this._joinLocations()}
       />
     );
@@ -43,12 +43,12 @@ export class Home extends React.Component {
 }
 
 Home.propTypes = {
-  routes: PropTypes.array,
+  climbs: PropTypes.array,
   areas: PropTypes.array,
   subareas: PropTypes.array,
   regions: PropTypes.array,
   subregions: PropTypes.array,
-  fetchRoutes: PropTypes.func.isRequired,
+  fetchClimbs: PropTypes.func.isRequired,
   fetchAreas: PropTypes.func.isRequired,
   fetchSubareas: PropTypes.func.isRequired,
   fetchRegions: PropTypes.func.isRequired,
@@ -57,7 +57,7 @@ Home.propTypes = {
 
 const mapStateToProps = state => {
   return {
-    routes: state.route.routes,
+    climbs: state.climb.climbs,
     regions: state.region.regions,
     subregions: state.subregion.subregions,
     areas: state.area.areas,
@@ -67,7 +67,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
-    fetchRoutes: searchText => dispatch(fetchRoutes(searchText)),
+    fetchClimbs: searchText => dispatch(fetchClimbs(searchText)),
     fetchAreas: searchText => dispatch(fetchAreas(searchText)),
     fetchSubareas: searchText => dispatch(fetchSubareas(searchText)),
     fetchRegions: searchText => dispatch(fetchRegions(searchText)),

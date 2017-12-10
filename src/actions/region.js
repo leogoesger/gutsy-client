@@ -21,6 +21,26 @@ const fetchRegionsFail = error => {
   };
 };
 
+const fetchRegionObject = () => {
+  return {
+    type: types.FETCH_REGION_OBJECT,
+  };
+};
+
+const fetchRegionSuccess = region => {
+  return {
+    type: types.FETCH_REGION_SUCCESS,
+    region,
+  };
+};
+
+const fetchRegionFail = error => {
+  return {
+    type: types.FETCH_REGION_FAIL,
+    error,
+  };
+};
+
 export function fetchRegions(searchText) {
   return async dispatch => {
     try {
@@ -34,6 +54,23 @@ export function fetchRegions(searchText) {
       }
     } catch (e) {
       e => dispatch(fetchRegionsFail(e.response.body));
+    }
+  };
+}
+
+export function fetchRegion(regionId) {
+  return async dispatch => {
+    try {
+      if (regionId) {
+        const regionResponse = await request.get(
+          `${process.env.SERVER_ADDRESS}/api/regions/${regionId}`
+        );
+        dispatch(fetchRegionSuccess(regionResponse.body));
+      } else {
+        dispatch(fetchRegionObject());
+      }
+    } catch (e) {
+      e => dispatch(fetchRegionFail(e.response.body));
     }
   };
 }

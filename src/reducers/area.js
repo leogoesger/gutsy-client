@@ -20,6 +20,15 @@ export default function(state: STATE = initialState, action: ACTION) {
     case types.FETCH_AREAS_FAIL:
       return objectAssign({}, state, {error: action.error});
 
+    case types.FETCH_AREA_OBJECT:
+      return objectAssign({}, state, {area: null});
+
+    case types.FETCH_AREA_SUCCESS:
+      return objectAssign({}, state, {area: action.area});
+
+    case types.FETCH_AREA_FAIL:
+      return objectAssign({}, state, {error: action.error});
+
     default:
       return state;
   }

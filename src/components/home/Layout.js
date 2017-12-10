@@ -43,7 +43,7 @@ export default class Layout extends React.Component {
                 <TextField
                   style={{margin: '0 !important'}}
                   autoFocus={true}
-                  floatingLabelText="Search for routes, areas, regions by name or description"
+                  floatingLabelText="Search for climbs, areas, or regions by its name! Try 'Buttermilk' or 'Bowling Pin Area'!"
                   value={this.state.searchText}
                   onChange={(_event, value) => this._updateResults(value)}
                   underlineFocusStyle={styles.underlineFocusStyle}
@@ -57,7 +57,7 @@ export default class Layout extends React.Component {
             </div>
           </div>
           <RouteCard
-            routes={this.props.routes}
+            climbs={this.props.climbs}
             searchText={this.state.searchText}
           />
           <LocationCard
@@ -72,7 +72,7 @@ export default class Layout extends React.Component {
 
 Layout.propTypes = {
   fetchInfo: PropTypes.func.isRequired,
-  routes: PropTypes.array,
+  climbs: PropTypes.array,
   location: PropTypes.array,
 };
 
