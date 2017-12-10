@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {fetchRegion} from '../actions/region';
-import Layout from '../components/climb/Layout';
+import Layout from '../components/region/Layout';
 
 export class Region extends React.Component {
   componentWillMount() {

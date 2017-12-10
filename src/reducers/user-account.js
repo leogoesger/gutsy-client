@@ -10,6 +10,7 @@ const initialState: STATE = {
   currentUser: null,
   signUpErrorMessage: null,
   loginErrorMessage: null,
+  fetchCurrentUserErrorMessage: null,
 };
 
 export default function(state: STATE = initialState, action: ACTION) {

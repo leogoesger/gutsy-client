@@ -14,6 +14,7 @@ import Subarea from '../containers/Subarea';
 import Area from '../containers/Area';
 import Subregion from '../containers/Subregion';
 import Region from '../containers/Region';
+import User from '../containers/User';
 
 class App extends React.Component {
   render() {
@@ -33,6 +34,7 @@ class App extends React.Component {
             <Route exact path="/areas/:id" component={Area} />
             <Route exact path="/subregions/:id" component={Subregion} />
             <Route exact path="/regions/:id" component={Region} />
+            <Route exact path="/user" component={User} />
           </Switch>
         </MuiThemeProvider>
       </div>

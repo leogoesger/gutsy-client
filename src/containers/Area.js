@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {fetchArea} from '../actions/area';
-import Layout from '../components/climb/Layout';
+import Layout from '../components/area/Layout';
 
 export class Area extends React.Component {
   componentWillMount() {

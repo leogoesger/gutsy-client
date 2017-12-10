@@ -3,7 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {fetchSubarea} from '../actions/subarea';
-import Layout from '../components/climb/Layout';
+import Layout from '../components/subarea/Layout';
 
 export class Subarea extends React.Component {
   componentWillMount() {

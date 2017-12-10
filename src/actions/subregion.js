@@ -27,10 +27,10 @@ const fetchSubregionObject = () => {
   };
 };
 
-const fetchSubregionSuccess = climb => {
+const fetchSubregionSuccess = subregion => {
   return {
     type: types.FETCH_SUBREGION_SUCCESS,
-    climb,
+    subregion,
   };
 };
 

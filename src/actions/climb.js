@@ -46,7 +46,7 @@ export function fetchClimbs(searchText) {
     try {
       if (searchText) {
         const climbsResponse = await request
-          .post(`${process.env.SERVER_ADDRESS}/api/search-routes`)
+          .post(`${process.env.SERVER_ADDRESS}/api/search-climbs`)
           .send({name: searchText});
         dispatch(fetchClimbsSuccess(climbsResponse.body));
       } else {
@@ -63,7 +63,7 @@ export function fetchClimb(climbId) {
     try {
       if (climbId) {
         const climbResponse = await request.get(
-          `${process.env.SERVER_ADDRESS}/api/routes/${climbId}`
+          `${process.env.SERVER_ADDRESS}/api/climbs/${climbId}`
         );
         dispatch(fetchClimbSuccess(climbResponse.body));
       } else {
