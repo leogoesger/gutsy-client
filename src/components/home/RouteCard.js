@@ -17,6 +17,7 @@ export default class RouteCard extends React.Component {
   constructor(props) {
     super(props);
   }
+
   _navigateToDetails(climbId) {
     navigateTo(`/climbs/${climbId}`);
   }

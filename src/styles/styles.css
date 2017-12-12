@@ -6,15 +6,6 @@ body {
   background-color: #fafafa;
 }
 
-.main-menu {
-  position: absolute;
-  width: 385px;
-  left: 0;
-  right: 0;
-  top: 5px;
-  margin: auto;
-}
-
 .headerListItem {
   margin-right: 40px;
 }
