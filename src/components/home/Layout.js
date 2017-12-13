@@ -30,7 +30,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header />
+        <Header path={this.props.path} />
         <div style={{marginTop: '120px'}}>
           <div className="row" style={styles.searchBox}>
             <div className="col-xs-1">
@@ -61,7 +61,7 @@ export default class Layout extends React.Component {
             searchText={this.state.searchText}
           />
           <LocationCard
-            location={this.props.location}
+            locations={this.props.locations}
             searchText={this.state.searchText}
           />
         </div>
@@ -71,9 +71,10 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
+  path: PropTypes.object,
   fetchInfo: PropTypes.func.isRequired,
   climbs: PropTypes.array,
-  location: PropTypes.array,
+  locations: PropTypes.array,
 };
 
 const styles = {
@@ -82,7 +83,8 @@ const styles = {
     margin: '20px auto',
     border: '1px solid #ddd',
     boxShadow: '2px 2px 2px #ddd',
-    width: '75%',
+    width: '50%',
+    overflow: 'invisibile',
   },
   buttonBox: {
     maxWidth: '1200px',
@@ -91,7 +93,8 @@ const styles = {
   icon: {
     width: 48,
     height: 48,
-    margin: '20px 12px 12px',
+    marginTop: '20px',
+    marginBottom: '10px',
   },
   floatingLabelStyle: {
     color: Colors.orange,

@@ -41,17 +41,19 @@ class Header extends React.Component {
   render() {
     return (
       <Layout
+        path={this.props.path}
         currentUser={this.props.currentUser}
         logOutUser={() => this.props.logOutUser()}
         fetchInfo={searchText => this._fetchInfo(searchText)}
         climbs={this.props.climbs}
-        location={this._joinLocations()}
+        locations={this._joinLocations()}
       />
     );
   }
 }
 
 Header.propTypes = {
+  path: PropTypes.object,
   currentUser: PropTypes.object,
   fetchCurrentUser: PropTypes.func.isRequired,
   logOutUser: PropTypes.func.isRequired,

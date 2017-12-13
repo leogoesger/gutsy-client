@@ -78,15 +78,15 @@ export default class LocationCard extends React.Component {
   }
 
   render() {
-    if (this.props.location && this.props.location.length) {
+    if (this.props.locations && this.props.locations.length) {
       return (
         <div className="table-div" style={{width: '75%'}}>
           <Table
             selectable={false}
             fixedHeader={true}
-            height={this.props.location.length > 6 ? '350px' : null}
+            height={this.props.locations.length > 6 ? '350px' : null}
             onCellClick={rowNumber =>
-              this._navigateToDetails(this.props.location[rowNumber])}
+              this._navigateToDetails(this.props.locations[rowNumber])}
           >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
@@ -95,7 +95,7 @@ export default class LocationCard extends React.Component {
                 </TableHeaderColumn>
               </TableRow>
             </TableHeader>
-            {this._renderLocationsList(this.props.location)}
+            {this._renderLocationsList(this.props.locations)}
           </Table>
         </div>
       );
@@ -105,7 +105,7 @@ export default class LocationCard extends React.Component {
 }
 
 LocationCard.propTypes = {
-  location: PropTypes.array,
+  locations: PropTypes.array,
   searchText: PropTypes.string,
 };
 

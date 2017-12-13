@@ -86,8 +86,9 @@ export default class Layout extends React.Component {
               <span style={{lineHeight: '55px'}}>{'Gutsy'}</span>
             </div>
             <SearchBar
+              path={this.props.path}
               climbs={this.props.climbs}
-              location={this.props.location}
+              locations={this.props.locations}
               fetchInfo={searchText => this.props.fetchInfo(searchText)}
             />
             <div style={styles.navItem} onClick={() => navigateTo('/')}>
@@ -149,9 +150,10 @@ const styles = {
 };
 
 Layout.propTypes = {
+  path: PropTypes.object,
   currentUser: PropTypes.object,
   logOutUser: PropTypes.func.isRequired,
   fetchInfo: PropTypes.func.isRequired,
   climbs: PropTypes.array,
-  location: PropTypes.array,
+  locations: PropTypes.array,
 };

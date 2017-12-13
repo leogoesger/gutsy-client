@@ -26,7 +26,7 @@ export default class SearchBar extends React.Component {
 
   componentWillReceiveProps(nextProps) {
     const climbs = nextProps.climbs;
-    const locations = nextProps.location;
+    const locations = nextProps.locations;
     let searchResult = [];
     if (climbs && climbs.length) {
       climbs.forEach(climb => {
@@ -90,7 +90,10 @@ export default class SearchBar extends React.Component {
     this._debouncedSearch();
   }
 
-  render() {
+  _renderSearchBar() {
+    if (this.props.path && this.props.path.pathname === '/') {
+      return null;
+    }
     return (
       <div style={styles.container}>
         <AutoComplete
@@ -107,12 +110,17 @@ export default class SearchBar extends React.Component {
       </div>
     );
   }
+
+  render() {
+    return this._renderSearchBar();
+  }
 }
 
 SearchBar.propTypes = {
+  path: PropTypes.object,
   fetchInfo: PropTypes.func.isRequired,
   climbs: PropTypes.array,
-  location: PropTypes.array,
+  locations: PropTypes.array,
 };
 
 const styles = {
