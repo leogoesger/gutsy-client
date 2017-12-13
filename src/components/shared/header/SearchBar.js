@@ -41,10 +41,6 @@ export default class SearchBar extends React.Component {
           ),
         });
       });
-      searchResult = concat(searchResult, {
-        text: '-----------------------------------',
-        value: '----',
-      });
     }
     if (locations && locations.length) {
       locations.forEach(location => {

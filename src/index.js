@@ -6,6 +6,7 @@ import {AppContainer} from 'react-hot-loader';
 import configureStore, {history} from './store/configureStore';
 import Root from './components/Root';
 import '../node_modules/flexboxgrid/css/flexboxgrid.min.css';
+import '../node_modules/react-image-gallery/styles/css/image-gallery.css';
 import './styles/styles.css';
 const store = configureStore();
 

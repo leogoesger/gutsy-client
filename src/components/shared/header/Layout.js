@@ -29,10 +29,10 @@ export default class Layout extends React.Component {
             iconButtonElement={
               <FlatButton
                 label={this.props.currentUser.firstName}
-                className="loginBtn e2e-header-login-btn"
+                className="e2e-header-login-btn"
                 labelPosition="after"
                 icon={<Person />}
-                style={styles.headerLogInButton}
+                style={styles.headerButton}
                 labelStyle={Buttons.buttonLabelSize}
                 onClick={() => this._handleMenuStatus(true)}
               />
@@ -59,16 +59,16 @@ export default class Layout extends React.Component {
           <FlatButton
             className="e2e-header-sign-up-btn"
             label="Sign Up"
-            style={Buttons.blackButton}
+            style={styles.headerButton}
             labelStyle={styles.headerWhiteButtonLabel}
             onClick={() => navigateTo('/signUp')}
           />
           <FlatButton
             label="Log In"
-            className="loginBtn e2e-header-login-btn"
+            className="e2e-header-login-btn"
             labelPosition="after"
             icon={<Person />}
-            style={styles.headerLogInButton}
+            style={styles.headerButton}
             labelStyle={styles.headerWhiteButtonLabel}
             onClick={() => navigateTo('/login')}
           />
@@ -113,6 +113,7 @@ const styles = {
     width: '100%',
     height: '60px',
     borderBottom: '1px solid rgba(0,0,0,0.12)',
+    zIndex: '2',
   },
   container: {
     margin: '0 auto',
@@ -135,13 +136,14 @@ const styles = {
   userDiv: {
     lineHeight: '60px',
   },
-  headerLogInButton: {
+  headerButton: {
     color: Colors.white,
     height: '36px',
     borderRadius: Theme.buttonBorderRadius,
   },
   headerWhiteButtonLabel: {
     marginLeft: '2px',
+    marginRight: '5px',
     textTransform: 'none',
     fontSize: Theme.buttonLabelSmall,
     padding: '5px 0px',
