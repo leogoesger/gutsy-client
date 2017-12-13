@@ -36,13 +36,15 @@ export class Home extends React.Component {
       <Layout
         fetchInfo={searchText => this._fetchInfo(searchText)}
         climbs={this.props.climbs}
-        location={this._joinLocations()}
+        locations={this._joinLocations()}
+        path={this.props.location}
       />
     );
   }
 }
 
 Home.propTypes = {
+  location: PropTypes.object,
   climbs: PropTypes.array,
   areas: PropTypes.array,
   subareas: PropTypes.array,

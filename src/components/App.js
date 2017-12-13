@@ -26,7 +26,7 @@ class App extends React.Component {
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
           <Switch>
-            <Route exact path="/" component={Home} />
+            <Route exact path="/" render={props => <Home {...props} />} />
             <Route exact path="/signUp" component={SignUp} />
             <Route exact path="/login" component={Login} />
             <Route exact path="/climbs/:id" component={Climb} />
