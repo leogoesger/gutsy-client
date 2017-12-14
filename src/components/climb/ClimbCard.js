@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import ReactStars from 'react-stars';
 import Paper from 'material-ui/Paper';
+import {Link} from 'react-router-dom';
 import ImageGallery from 'react-image-gallery';
 
 import image from '../../static-data/images/seven-spanish-angles.jpeg';
@@ -17,26 +18,37 @@ export default class ClimbCard extends React.Component {
 
   _renderInfo() {
     if (this.props.climb) {
-      const images = [
-        {
-          original: 'http://lorempixel.com/1000/600/nature/1/',
-          thumbnail: 'http://lorempixel.com/250/150/nature/1/',
-        },
-        {
-          original: 'http://lorempixel.com/1000/600/nature/2/',
-          thumbnail: 'http://lorempixel.com/250/150/nature/2/',
-        },
-        {
-          original: 'http://lorempixel.com/1000/600/nature/3/',
-          thumbnail: 'http://lorempixel.com/250/150/nature/3/',
-        },
-      ];
+      const images = [{original: image}, {original: image}, {original: image}];
       return (
         <div className="row" style={styles.container}>
           <div className="col-lg-6 col-md-6 col-xs-12" style={styles.image}>
-            <img src={image} width="100%" height="100%" />
+            <ImageGallery
+              items={images}
+              lazyLoad={true}
+              infinite={true}
+              showThumbnails={false}
+              showFullscreenButton={false}
+              showPlayButton={false}
+              showBullets={true}
+            />
           </div>
-          <div className="col-lg-6 col-md-6 col-xs-12" style={styles.info}>
+          <div className="col-lg-5 col-md-5 col-xs-12" style={styles.info}>
+            <span style={{fontSize: '12px'}}>
+              <Link
+                to={`/regions/${this.props.climb.subarea.area.subregion.region
+                  .id}`}
+              >{`${this.props.climb.subarea.area.subregion.region.name}`}</Link>
+              {'  >  '}
+              <Link
+                to={`/subregions/${this.props.climb.subarea.area.subregion.id}`}
+              >{`${this.props.climb.subarea.area.subregion.name}`}</Link>
+              {'  >  '}
+              <Link to={`/areas/${this.props.climb.subarea.area.id}`}>{`${this
+                .props.climb.subarea.area.name}`}</Link>
+              {'  >  '}
+              <Link to={`/subareas/${this.props.climb.subarea.id}`}>{`${this
+                .props.climb.subarea.name}`}</Link>
+            </span>
             <h2>
               {this.props.climb.name}
               <ReactStars
@@ -47,6 +59,7 @@ export default class ClimbCard extends React.Component {
                 edit={false}
               />
             </h2>
+            <p>{this.props.climb.description}</p>
           </div>
         </div>
       );
