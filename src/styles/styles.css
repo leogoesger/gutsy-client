@@ -34,6 +34,13 @@ a:hover {
   border-radius: 2px;
 }
 
+.mainPaper {
+  margin: 0 auto;
+  margin-top: 100px;
+  margin-bottom: 50px;
+  border-radius: 5px;
+  padding: 60px 60px 60px 60px;
+}
 .table-div {
   max-width: 1200px;
   margin: 20px auto;
@@ -44,4 +51,36 @@ a:hover {
 .grade {
   font-weight: 600;
   font-size: 14px;
+}
+
+.editOnSmall {
+  padding-left: 40px;
+}
+
+.climbActionIcon {
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+}
+
+.climbActionIcon:hover {
+  border-color: #fd5a1e;
+  cursor: pointer;
+}
+
+.climbInfoIcon {
+  margin-right: 5px;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+  padding: 2px;
+  width: 25px;
+  height: 25px;
+}
+
+@media screen and (max-width: 48em) {
+  .editOnSmall {
+    padding-left: 0px;
+    margin-top: 20px;
+  }
 }

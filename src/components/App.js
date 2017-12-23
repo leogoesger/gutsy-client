@@ -29,7 +29,11 @@ class App extends React.Component {
             <Route exact path="/" render={props => <Home {...props} />} />
             <Route exact path="/signUp" component={SignUp} />
             <Route exact path="/login" component={Login} />
-            <Route exact path="/climbs/:id" component={Climb} />
+            <Route
+              exact
+              path="/climbs/:id"
+              render={props => <Climb {...props} />}
+            />
             <Route exact path="/subareas/:id" component={Subarea} />
             <Route exact path="/areas/:id" component={Area} />
             <Route exact path="/subregions/:id" component={Subregion} />

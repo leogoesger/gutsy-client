@@ -1,82 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import IconMenu from 'material-ui/IconMenu';
-import MenuItem from 'material-ui/MenuItem';
-import FlatButton from 'material-ui/FlatButton';
-import Person from 'material-ui/svg-icons/social/person';
 
 import {Theme} from '../../../styles/Theme';
 import {Colors} from '../../../styles/Colors';
-import {Buttons} from '../../../styles/Buttons';
 import {navigateTo} from '../../../utils/helpers';
 import SearchBar from './SearchBar';
+import UserAction from './UserAction';
 
 export default class Layout extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {menuOpen: false};
-  }
-
-  _handleMenuStatus(status) {
-    this.setState({menuOpen: status});
-  }
-
-  _renderUserAction() {
-    if (this.props.currentUser) {
-      return (
-        <div style={styles.userDiv}>
-          <IconMenu
-            iconButtonElement={
-              <FlatButton
-                label={this.props.currentUser.firstName}
-                className="e2e-header-login-btn"
-                labelPosition="after"
-                icon={<Person />}
-                style={styles.headerButton}
-                labelStyle={Buttons.buttonLabelSize}
-                onClick={() => this._handleMenuStatus(true)}
-              />
-            }
-            open={this.state.menuOpen}
-            onRequestChange={() => this._handleMenuStatus(false)}
-          >
-            <MenuItem
-              value="1"
-              primaryText="My Profile"
-              onClick={() => navigateTo('/user')}
-            />
-            <MenuItem
-              value="2"
-              primaryText="Sign Out"
-              onClick={() => this.props.logOutUser()}
-            />
-          </IconMenu>
-        </div>
-      );
-    } else {
-      return (
-        <div style={styles.userDiv}>
-          <FlatButton
-            className="e2e-header-sign-up-btn"
-            label="Sign Up"
-            style={styles.headerButton}
-            labelStyle={styles.headerWhiteButtonLabel}
-            onClick={() => navigateTo('/signUp')}
-          />
-          <FlatButton
-            label="Log In"
-            className="e2e-header-login-btn"
-            labelPosition="after"
-            icon={<Person />}
-            style={styles.headerButton}
-            labelStyle={styles.headerWhiteButtonLabel}
-            onClick={() => navigateTo('/login')}
-          />
-        </div>
-      );
-    }
-  }
-
   render() {
     return (
       <div style={styles.nav}>
@@ -98,7 +29,10 @@ export default class Layout extends React.Component {
               <span style={{lineHeight: '60px'}}>{'Books'}</span>
             </div>
           </div>
-          {this._renderUserAction()}
+          <UserAction
+            currentUser={this.props.currentUser}
+            logOutUser={this.props.logOutUser}
+          />
         </div>
       </div>
     );
@@ -113,7 +47,7 @@ const styles = {
     width: '100%',
     height: '60px',
     borderBottom: '1px solid rgba(0,0,0,0.12)',
-    zIndex: '2',
+    zIndex: '99',
   },
   container: {
     margin: '0 auto',
@@ -132,22 +66,6 @@ const styles = {
     fontSize: Theme.buttonLabelSmall,
     color: Colors.white,
     cursor: 'pointer',
-  },
-  userDiv: {
-    lineHeight: '60px',
-  },
-  headerButton: {
-    color: Colors.white,
-    height: '36px',
-    borderRadius: Theme.buttonBorderRadius,
-  },
-  headerWhiteButtonLabel: {
-    marginLeft: '2px',
-    marginRight: '5px',
-    textTransform: 'none',
-    fontSize: Theme.buttonLabelSmall,
-    padding: '5px 0px',
-    color: Colors.white,
   },
 };
 
