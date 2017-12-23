@@ -36,11 +36,7 @@ export default function(state: STATE = initialState, action: ACTION) {
       return objectAssign({}, state, {currentUser: action.currentUser});
 
     case types.LOG_IN_FAIL: {
-      let loginErrorMessage = null;
-      if (isEmailError(action.error)) {
-        loginErrorMessage = messagesMap.KNOWN_EMAIL_ERROR;
-      }
-      return objectAssign({}, state, {loginErrorMessage});
+      return objectAssign({}, state, {loginErrorMessage: action.error});
     }
 
     case types.FETCH_CURRENT_USER_SUCCESS: {
