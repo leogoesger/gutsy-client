@@ -10,6 +10,12 @@ export class Climb extends React.Component {
     this.props.fetchClimb(this.props.match.params.id);
   }
 
+  componentWillReceiveProps(_nextProps) {
+    if (this.props.match.params.id !== _nextProps.match.params.id) {
+      this.props.fetchClimb(_nextProps.match.params.id);
+    }
+  }
+
   render() {
     return <Layout message={this.props.message} climb={this.props.climb} />;
   }

@@ -43,7 +43,7 @@ export default class Layout extends React.Component {
                 <TextField
                   style={{margin: '0 !important'}}
                   autoFocus={true}
-                  floatingLabelText="Search for climbs, areas, or regions by its name! Try 'Buttermilk' or 'Bowling Pin Area'!"
+                  floatingLabelText="Search for climbs, areas, or regions by its name!"
                   value={this.state.searchText}
                   onChange={(_event, value) => this._updateResults(value)}
                   underlineFocusStyle={styles.underlineFocusStyle}

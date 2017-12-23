@@ -71,7 +71,8 @@ export default class LoginCard extends React.Component {
         >
           <LoginForm
             handleUserDataChange={(value, property) =>
-              this._handleUserDataChange(value, property)}
+              this._handleUserDataChange(value, property)
+            }
           />
           <div
             style={{

@@ -29,25 +29,21 @@ export default class SearchBar extends React.Component {
     const locations = nextProps.locations;
     let searchResult = [];
     if (climbs && climbs.length) {
-      climbs.forEach(climb => {
+      climbs.map(climb => {
         searchResult = concat(searchResult, {
           text: climb.name,
           value: (
             <MenuItem
               primaryText={climb.name}
               leftIcon={<Terrain />}
-              onClick={() => navigateTo(`/climbs/${climb.id}`)}
+              onClick={() => this._navigateToDetails(climb)}
             />
           ),
         });
       });
-      searchResult = concat(searchResult, {
-        text: '-----------------------------------',
-        value: '----',
-      });
     }
     if (locations && locations.length) {
-      locations.forEach(location => {
+      locations.map(location => {
         searchResult = concat(searchResult, {
           text: location.name,
           value: (
@@ -74,7 +70,9 @@ export default class SearchBar extends React.Component {
   }
 
   _navigateToDetails(location) {
-    if (location.area) {
+    if (location.subarea) {
+      navigateTo(`/climbs/${location.id}`);
+    } else if (location.area) {
       navigateTo(`/subareas/${location.id}`);
     } else if (location.subregion) {
       navigateTo(`/areas/${location.id}`);

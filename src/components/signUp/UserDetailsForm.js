@@ -37,7 +37,6 @@ export default class UserDetailsForm extends React.Component {
       <div>
         <TextField
           className="requiredField"
-          autoFocus={true}
           value={this.state.firstName}
           inputStyle={{textTransform: 'capitalize'}}
           floatingLabelText="First Name"

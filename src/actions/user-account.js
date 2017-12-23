@@ -36,10 +36,10 @@ const loginSuccessObject = currentUser => {
   };
 };
 
-const loginFailObject = currentUser => {
+const loginFailObject = error => {
   return {
     type: types.LOG_IN_FAIL,
-    currentUser,
+    error,
   };
 };
 
@@ -81,6 +81,7 @@ export function loginUser(userData) {
       dispatch(loginSuccessObject(loginResponse.body.user));
       navigateTo('/');
     } catch (e) {
+      console.log('sdfsdf');
       dispatch(loginFailObject(e.response.body));
     }
   };
