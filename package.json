@@ -53,6 +53,7 @@
     "react-highlighter": "0.4.2",
     "react-image-gallery": "0.8.6",
     "react-redux": "5.0.5",
+    "react-responsive-carousel": "3.1.30",
     "react-router-dom": "4.2.2",
     "react-router-redux": "5.0.0-alpha.6",
     "react-stars": "2.2.5",

@@ -55,6 +55,7 @@ export default class ClimbCard extends React.Component {
               showFullscreenButton={false}
               showPlayButton={false}
               showBullets={true}
+              showNav={false}
             />
           </div>
           <div className="editOnSmall col-lg-6 col-md-6 col-sm-6 col-xs-12">

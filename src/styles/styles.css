@@ -78,6 +78,10 @@ a:hover {
   height: 25px;
 }
 
+.image-gallery-bullet {
+  margin-left: 15px !important;
+}
+
 @media screen and (max-width: 48em) {
   .editOnSmall {
     padding-left: 0px;
