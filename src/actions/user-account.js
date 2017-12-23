@@ -81,8 +81,7 @@ export function loginUser(userData) {
       dispatch(loginSuccessObject(loginResponse.body.user));
       navigateTo('/');
     } catch (e) {
-      console.log('sdfsdf');
-      dispatch(loginFailObject(e.response.body));
+      dispatch(loginFailObject(JSON.parse(e.response.text).message));
     }
   };
 }
