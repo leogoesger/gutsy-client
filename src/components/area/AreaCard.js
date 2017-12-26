@@ -3,10 +3,6 @@ import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
 
 export default class AreaCard extends React.Component {
-  constructor(props) {
-    super(props);
-  }
-
   _handleMessageClose() {
     this.setState({showMessage: false, message: ''});
   }
@@ -14,7 +10,7 @@ export default class AreaCard extends React.Component {
   render() {
     return (
       <Paper
-        className="col-lg-7 col-md-10 col-xs-12 tabs-container"
+        className="col-lg-7 col-md-10 col-xs-12"
         style={styles.tabsCard}
         zDepth={2}
       >

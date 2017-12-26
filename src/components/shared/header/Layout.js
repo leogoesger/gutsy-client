@@ -25,7 +25,7 @@ export default class Layout extends React.Component {
             <div style={styles.navItem} onClick={() => navigateTo('/')}>
               <span style={{lineHeight: '60px'}}>{'Climbs'}</span>
             </div>
-            <div style={styles.navItem} onClick={() => navigateTo('/')}>
+            <div style={styles.navItem} onClick={() => navigateTo('/books')}>
               <span style={{lineHeight: '60px'}}>{'Books'}</span>
             </div>
           </div>
