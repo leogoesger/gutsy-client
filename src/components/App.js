@@ -10,6 +10,7 @@ import Home from '../containers/Home';
 import SignUp from '../containers/SignUp';
 import Login from '../containers/Login';
 import Climb from '../containers/Climb';
+import BookList from '../containers/BookList';
 import Subarea from '../containers/Subarea';
 import Area from '../containers/Area';
 import Subregion from '../containers/Subregion';
@@ -29,6 +30,7 @@ class App extends React.Component {
             <Route exact path="/" render={props => <Home {...props} />} />
             <Route exact path="/signUp" component={SignUp} />
             <Route exact path="/login" component={Login} />
+            <Route exact path="/books" component={BookList} />
             <Route
               exact
               path="/climbs/:id"

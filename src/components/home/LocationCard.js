@@ -39,8 +39,9 @@ export default class LocationCard extends React.Component {
 
   _renderLocation(location) {
     if (location.area) {
-      return `${location.area.name} < ${location.area.subregion
-        .name} < ${location.area.subregion.region.name}`;
+      return `${location.area.name} < ${location.area.subregion.name} < ${
+        location.area.subregion.region.name
+      }`;
     } else if (location.subregion) {
       return `${location.subregion.name} < ${location.subregion.region.name}`;
     } else if (location.region) {
@@ -86,7 +87,8 @@ export default class LocationCard extends React.Component {
             fixedHeader={true}
             height={this.props.locations.length > 6 ? '350px' : null}
             onCellClick={rowNumber =>
-              this._navigateToDetails(this.props.locations[rowNumber])}
+              this._navigateToDetails(this.props.locations[rowNumber])
+            }
           >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>

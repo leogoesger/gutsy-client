@@ -43,10 +43,7 @@ export default class ClimbCard extends React.Component {
       const images = [{original: image}, {original: image}, {original: image}];
       return (
         <div className="row" style={styles.container}>
-          <div
-            className="col-lg-6 col-md-6 col-sm-6 col-xs-12"
-            style={styles.image}
-          >
+          <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 imageContainer">
             <ImageGallery
               items={images}
               lazyLoad={true}
@@ -121,11 +118,6 @@ const styles = {
     justifyContent: 'space-around',
     minHeight: '300px',
   },
-  image: {
-    padding: '0px',
-    boxShadow:
-      '0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19)',
-  },
   title: {
     display: 'flex',
     justifyContent: 'space-between',
@@ -134,6 +126,7 @@ const styles = {
     width: '50%',
     fontWeight: 'bold',
   },
+
   refresh: {
     display: 'inline-block',
     position: 'relative',
