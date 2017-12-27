@@ -1,16 +1,23 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import IconButton from 'material-ui/IconButton';
 
 export default class ClimbInfoIcons extends React.Component {
   _renderIcons(icons) {
     return icons.map((icon, index) => {
       return (
-        <img
+        <IconButton
+          style={{width: '36px', padding: '0px', textAlign: 'left'}}
           key={index}
-          className="climbInfoIcon"
-          src={`../../static-data/images/${icon}.svg`}
-          title={icon}
-        />
+          tooltip={icon}
+          tooltipPosition="bottom-center"
+        >
+          <img
+            className="climbInfoIcon"
+            src={`../../static-data/images/${icon}.svg`}
+            data-tip={icon}
+          />
+        </IconButton>
       );
     });
   }
