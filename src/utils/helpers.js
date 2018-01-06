@@ -1,4 +1,7 @@
+import React from 'react';
+
 import {history} from '../store/configureStore';
+import {Link} from 'react-router-dom';
 
 export function navigateTo(pathname, query) {
   history.push({pathname, query});
@@ -54,4 +57,26 @@ export function capitalize(string) {
 
 export function isEmailError(error) {
   return error.errors[0].message === 'email must be unique';
+}
+
+export function renderAuthor(authors) {
+  return authors.map((author, index) => {
+    if (index === authors.length - 1) {
+      return (
+        <span className="author" key={index}>
+          <Link to={`/authors/${author.id}`}>{`${author.firstName} ${
+            author.lastName
+          }`}</Link>
+        </span>
+      );
+    }
+    return (
+      <span className="author" key={index}>
+        <Link to={`/authors/${author.id}`}>{`${author.firstName} ${
+          author.lastName
+        }`}</Link>
+        {', '}
+      </span>
+    );
+  });
 }

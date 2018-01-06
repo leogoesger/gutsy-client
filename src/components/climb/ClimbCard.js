@@ -8,7 +8,7 @@ import IconButton from 'material-ui/IconButton';
 import Done from 'material-ui/svg-icons/action/done';
 import Add from 'material-ui/svg-icons/content/add';
 
-import image from '../../static-data/images/seven-spanish-angles.jpeg';
+import image from '../../static-data/images/seven-spanish-angles.jpg';
 import {Colors} from '../../styles/Colors';
 import ClimbInfoIcons from './ClimbInfoIcons';
 
@@ -160,13 +160,13 @@ const styles = {
     border: 'none',
   },
   actionIcon: {
-    width: '32px',
-    height: '32px',
+    width: '30px',
+    height: '30px',
   },
   actionIconDiv: {
     marginLeft: '10px',
     padding: '0px',
-    width: '32px',
-    height: '32px',
+    width: '30px',
+    height: '30px',
   },
 };

@@ -1,8 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
+import IconButton from 'material-ui/IconButton';
+import {CardTitle, CardText} from 'material-ui/Card';
+import Cart from 'material-ui/svg-icons/action/add-shopping-cart';
 
 import bookImage from '../../static-data/images/books/bishop-area-select.jpg';
+import {renderAuthor} from '../../utils/helpers';
+import {Colors} from '../../styles/Colors';
 
 export default class BookCard extends React.Component {
   _renderBookImage() {
@@ -16,19 +21,18 @@ export default class BookCard extends React.Component {
   _renderBookInfo(book) {
     return (
       <div className="editOnSmall col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div
-          style={{
-            display: 'flex',
-            justifyContent: 'space-between',
-            marginTop: '10px',
-          }}
-        >
-          <div style={styles.title}>
-            <div>{book.title}</div>
-          </div>
+        <div style={{width: '100%'}}>
+          <IconButton
+            tooltip="Add to cart"
+            tooltipPosition="bottom-center"
+            iconStyle={styles.actionIcon}
+            style={styles.actionIconDiv}
+          >
+            <Cart className="climbActionIcon" hoverColor={Colors.orange} />
+          </IconButton>
         </div>
-
-        <p>{book.description}</p>
+        <CardTitle title={book.title} subtitle={renderAuthor(book.authors)} />
+        <CardText>{book.description}</CardText>
       </div>
     );
   }
@@ -80,5 +84,15 @@ const styles = {
     width: '80px',
     display: 'flex',
     justifyContent: 'space-around',
+  },
+  actionIcon: {
+    width: '26px',
+    height: '26px',
+    padding: '2px',
+  },
+  actionIconDiv: {
+    padding: '0px',
+    width: '26px',
+    height: '26px',
   },
 };
