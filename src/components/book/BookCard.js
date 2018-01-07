@@ -1,13 +1,13 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import Paper from 'material-ui/Paper';
-import IconButton from 'material-ui/IconButton';
 import {CardTitle, CardText} from 'material-ui/Card';
 import Cart from 'material-ui/svg-icons/action/add-shopping-cart';
 
+import RaisedButton from 'material-ui/RaisedButton';
+
 import bookImage from '../../static-data/images/books/bishop-area-select.jpg';
 import {renderAuthor} from '../../utils/helpers';
-import {Colors} from '../../styles/Colors';
 
 export default class BookCard extends React.Component {
   _renderBookImage() {
@@ -18,18 +18,39 @@ export default class BookCard extends React.Component {
     );
   }
 
+  _renderAddToCardBtn(book, user) {
+    if (user) {
+      let userBookIndex = null;
+      user.books.forEach((userBook, index) => {
+        if (
+          userBook.UserBook.userBookStatusId === 2 &&
+          userBook.id === book.id
+        ) {
+          userBookIndex = index;
+        }
+      });
+      if (userBookIndex) {
+        const date = new Date(user.books[userBookIndex].UserBook.createdAt);
+        return `Purchased on ${date.getMonth() +
+          1}-${date.getDate()}-${date.getYear() - 100 + 2000}`;
+      }
+    }
+    return (
+      <RaisedButton
+        onClick={() => console.log('clicking buttons')}
+        target="_blank"
+        backgroundColor="#F0C463"
+        label="Add To Cart"
+        icon={<Cart />}
+      />
+    );
+  }
+
   _renderBookInfo(book) {
     return (
       <div className="editOnSmall col-lg-6 col-md-6 col-sm-6 col-xs-12">
-        <div style={{width: '100%'}}>
-          <IconButton
-            tooltip="Add to cart"
-            tooltipPosition="bottom-center"
-            iconStyle={styles.actionIcon}
-            style={styles.actionIconDiv}
-          >
-            <Cart className="climbActionIcon" hoverColor={Colors.orange} />
-          </IconButton>
+        <div style={{display: 'flex', justifyContent: 'flex-end'}}>
+          {this._renderAddToCardBtn(this.props.book, this.props.currentUser)}
         </div>
         <CardTitle title={book.title} subtitle={renderAuthor(book.authors)} />
         <CardText>{book.description}</CardText>
@@ -52,13 +73,14 @@ export default class BookCard extends React.Component {
   render() {
     return (
       <Paper className="col-lg-9 col-md-10 col-xs-12 mainPaper" zDepth={2}>
-        {this._renderBook(this.props.book)}
+        {this._renderBook(this.props.book, this.props.currentUser)}
       </Paper>
     );
   }
 }
 
 BookCard.propTypes = {
+  currentUser: PropTypes.object,
   book: PropTypes.object,
 };
 

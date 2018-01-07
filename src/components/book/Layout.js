@@ -9,12 +9,13 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Header />
-        <BookCard book={this.props.book} />
+        <BookCard book={this.props.book} currentUser={this.props.currentUser} />
       </div>
     );
   }
 }
 
 Layout.propTypes = {
+  currentUser: PropTypes.object,
   book: PropTypes.object,
 };

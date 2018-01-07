@@ -3,6 +3,9 @@ import PropTypes from 'prop-types';
 import IconMenu from 'material-ui/IconMenu';
 import MenuItem from 'material-ui/MenuItem';
 import FlatButton from 'material-ui/FlatButton';
+import Badge from 'material-ui/Badge';
+import IconButton from 'material-ui/IconButton';
+import Cart from 'material-ui/svg-icons/action/shopping-cart';
 
 import Person from 'material-ui/svg-icons/social/person';
 import Face from 'material-ui/svg-icons/action/face';
@@ -51,10 +54,35 @@ export default class UserAction extends React.Component {
     );
   }
 
+  _renderCart(user) {
+    let count = 0;
+    user.books.forEach(book => {
+      if (book.UserBook.userBookStatusId === 2) {
+        count++;
+      }
+    });
+    if (count) {
+      return (
+        <Badge
+          badgeContent={count}
+          secondary={true}
+          badgeStyle={styles.badge}
+          style={{padding: '0px', marginRight: '5px'}}
+        >
+          <IconButton style={{padding: '0px 0px 11px 5px'}}>
+            <Cart color={Colors.white} style={{width: '6px', height: '6px'}} />
+          </IconButton>
+        </Badge>
+      );
+    }
+    return null;
+  }
+
   render() {
     if (this.props.currentUser) {
       return (
         <div style={styles.userDiv}>
+          {this._renderCart(this.props.currentUser)}
           <IconMenu
             anchorOrigin={{horizontal: 'right', vertical: 'bottom'}}
             targetOrigin={{horizontal: 'right', vertical: 'top'}}
@@ -103,6 +131,8 @@ export default class UserAction extends React.Component {
 
 const styles = {
   userDiv: {
+    display: 'flex',
+    justifyContent: 'flex-end',
     marginTop: '10px',
     lineHeight: '30px',
   },
@@ -118,6 +148,14 @@ const styles = {
     fontSize: Theme.buttonLabelSmall,
     padding: '5px 0px',
     color: Colors.white,
+  },
+  badge: {
+    top: 0,
+    right: 0,
+    fontSize: '9px',
+    width: '18px',
+    height: '18px',
+    backgroundColor: Colors.orange,
   },
 };
 

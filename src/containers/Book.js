@@ -17,12 +17,19 @@ export class Book extends React.Component {
   }
 
   render() {
-    return <Layout message={this.props.message} book={this.props.book} />;
+    return (
+      <Layout
+        message={this.props.message}
+        book={this.props.book}
+        currentUser={this.props.currentUser}
+      />
+    );
   }
 }
 
 Book.propTypes = {
   book: PropTypes.object,
+  currentUser: PropTypes.object,
   message: PropTypes.string,
   fetchBook: PropTypes.func,
   match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),
@@ -30,6 +37,7 @@ Book.propTypes = {
 
 const mapStateToProps = state => {
   return {
+    currentUser: state.userAccount.currentUser,
     book: state.book.book,
     message: state.book.error,
   };
