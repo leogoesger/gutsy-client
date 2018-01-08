@@ -9,6 +9,7 @@ import Cart from 'material-ui/svg-icons/action/add-shopping-cart';
 import bookImage from '../../static-data/images/books/bishop-area-select.jpg';
 import {renderAuthor} from '../../utils/helpers';
 import {Colors} from '../../styles/Colors';
+import SignUpModal from '../../containers/SignUpModal';
 
 export default class BookCard extends React.Component {
   _addToCartRequest() {
@@ -19,7 +20,7 @@ export default class BookCard extends React.Component {
         userBookStatusId: 2,
       });
     } else {
-      console.log('Hello');
+      this.props.openDialog();
     }
   }
 
@@ -54,14 +55,14 @@ export default class BookCard extends React.Component {
         );
         return (
           <span style={{fontSize: '14px', color: Colors.orange}}>
-            {`Purchased on ${moment(date).format('MMM DD, YYYY')}`}
+            {`Purchased on ${moment(date).format('MMM DD, YYYY')}!`}
           </span>
         );
       }
-      if (bookCartedIndex) {
+      if (bookCartedIndex || bookCartedIndex == 0) {
         return (
           <span style={{fontSize: '14px', color: Colors.orange}}>
-            {'Added in your cart'}
+            {'Added to your Cart!'}
           </span>
         );
       }
@@ -105,12 +106,15 @@ export default class BookCard extends React.Component {
     return (
       <Paper className="col-lg-9 col-md-10 col-xs-12 mainPaper" zDepth={2}>
         {this._renderBook(this.props.book, this.props.currentUser)}
+        <SignUpModal />
       </Paper>
     );
   }
 }
 
 BookCard.propTypes = {
+  openDialog: PropTypes.func,
+  path: PropTypes.object,
   addToCartRequest: PropTypes.func,
   currentUser: PropTypes.object,
   book: PropTypes.object,
@@ -148,5 +152,15 @@ const styles = {
     padding: '0px',
     width: '26px',
     height: '26px',
+  },
+  dialog: {
+    backgroundColor: Colors.lightGreyPaper,
+    maxHeight: '666px',
+    padding: 'auto',
+  },
+  dialogInner: {
+    width: 'auto',
+    maxWidth: '560px',
+    margin: '0 auto',
   },
 };

@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 
-import Header from '../../containers/Header';
 import {autoHideDuration} from '../../utils/constants';
 
 import AreaCard from './AreaCard';
@@ -37,7 +36,6 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <AreaCard area={this.props.area} />
         <Snackbar
           style={{color: 'black'}}

@@ -17,6 +17,7 @@ import Area from '../containers/Area';
 import Subregion from '../containers/Subregion';
 import Region from '../containers/Region';
 import User from '../containers/User';
+import Header from '../containers/Header';
 
 class App extends React.Component {
   render() {
@@ -27,27 +28,30 @@ class App extends React.Component {
     return (
       <div>
         <MuiThemeProvider muiTheme={muiTheme}>
-          <Switch>
-            <Route exact path="/" render={props => <Home {...props} />} />
-            <Route exact path="/signUp" component={SignUp} />
-            <Route exact path="/login" component={Login} />
-            <Route exact path="/books" component={BookList} />
-            <Route
-              exact
-              path="/books/:id"
-              render={props => <Book {...props} />}
-            />
-            <Route
-              exact
-              path="/climbs/:id"
-              render={props => <Climb {...props} />}
-            />
-            <Route exact path="/subareas/:id" component={Subarea} />
-            <Route exact path="/areas/:id" component={Area} />
-            <Route exact path="/subregions/:id" component={Subregion} />
-            <Route exact path="/regions/:id" component={Region} />
-            <Route exact path="/user" component={User} />
-          </Switch>
+          <div>
+            <Header />
+            <Switch>
+              <Route exact path="/" render={props => <Home {...props} />} />
+              <Route exact path="/signUp" component={SignUp} />
+              <Route exact path="/login" component={Login} />
+              <Route exact path="/books" component={BookList} />
+              <Route
+                exact
+                path="/books/:id"
+                render={props => <Book {...props} />}
+              />
+              <Route
+                exact
+                path="/climbs/:id"
+                render={props => <Climb {...props} />}
+              />
+              <Route exact path="/subareas/:id" component={Subarea} />
+              <Route exact path="/areas/:id" component={Area} />
+              <Route exact path="/subregions/:id" component={Subregion} />
+              <Route exact path="/regions/:id" component={Region} />
+              <Route exact path="/user" component={User} />
+            </Switch>
+          </div>
         </MuiThemeProvider>
       </div>
     );

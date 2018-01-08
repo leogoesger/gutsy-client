@@ -30,7 +30,7 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header path={this.props.path} />
+        <Header path={this.props.path} style={{zIndex: 999}} />
         <div style={{marginTop: '120px'}}>
           <div className="row" style={styles.searchBox}>
             <div className="col-xs-1">

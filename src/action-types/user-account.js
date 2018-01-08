@@ -9,6 +9,9 @@ const UserAccountTypes = {
 
   FETCH_CURRENT_USER_SUCCESS: 'FETCH_CURRENT_USER_SUCCESS',
   LOG_OUT_USER: 'LOG_OUT_USER',
+
+  OPEN_DIALOG: 'OPEN_DIALOG',
+  CLOSE_DIALOG: 'CLOSE_DIALOG',
 };
 
 export default UserAccountTypes;

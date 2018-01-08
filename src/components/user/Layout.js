@@ -2,9 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 
-import Header from '../../containers/Header';
 import {autoHideDuration} from '../../utils/constants';
-
 import UserCard from './UserCard';
 
 export default class Layout extends React.Component {
@@ -37,7 +35,6 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <UserCard currentUser={this.props.currentUser} />
         <Snackbar
           style={{color: 'black'}}

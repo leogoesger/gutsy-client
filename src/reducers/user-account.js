@@ -11,6 +11,7 @@ const initialState: STATE = {
   signUpErrorMessage: null,
   loginErrorMessage: null,
   fetchCurrentUserErrorMessage: null,
+  dialogOpen: false,
 };
 
 export default function(state: STATE = initialState, action: ACTION) {
@@ -45,6 +46,14 @@ export default function(state: STATE = initialState, action: ACTION) {
 
     case types.LOG_OUT_USER: {
       return objectAssign({}, state, {currentUser: null});
+    }
+
+    case types.OPEN_DIALOG: {
+      return objectAssign({}, state, {dialogOpen: true});
+    }
+
+    case types.CLOSE_DIALOG: {
+      return objectAssign({}, state, {dialogOpen: false});
     }
 
     default:

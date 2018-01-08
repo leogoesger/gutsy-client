@@ -2,7 +2,6 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import Snackbar from 'material-ui/Snackbar';
 
-import Header from '../../containers/Header';
 import UserDetailCard from './UserDetailCard';
 import {autoHideDuration} from '../../utils/constants';
 
@@ -36,7 +35,6 @@ export default class Layout extends React.Component {
   render() {
     return (
       <div>
-        <Header />
         <UserDetailCard
           signUpUser={userData => this.props.signUpUser(userData)}
         />
