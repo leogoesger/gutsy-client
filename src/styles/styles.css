@@ -18,6 +18,10 @@ a:hover {
   margin-right: 40px;
 }
 
+.row {
+  margin: 0px;
+}
+
 .requiredField label::after {
   content: '*';
   font-size: 12px;
@@ -69,7 +73,6 @@ a:hover {
 }
 
 .climbInfoIcon {
-  margin-right: 5px;
   border-style: solid;
   border-width: 1px;
   border-radius: 4px;
@@ -91,6 +94,13 @@ a:hover {
 .imageContainer {
   padding: 0px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
+}
+
+.author a,
+.author {
+  color: #808080;
+  font-size: 14px;
+  margin-top: 6px;
 }
 
 @media screen and (max-width: 48em) {

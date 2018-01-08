@@ -55,14 +55,14 @@ export function fetchBooks() {
   };
 }
 
-export function fetchBook(climbId) {
+export function fetchBook(bookId) {
   return async dispatch => {
     try {
-      if (climbId) {
-        const climbResponse = await request.get(
-          `${process.env.SERVER_ADDRESS}/api/climbs/${climbId}`
+      if (bookId) {
+        const bookResponse = await request.get(
+          `${process.env.SERVER_ADDRESS}/api/books/${bookId}`
         );
-        dispatch(fetchBookSuccess(climbResponse.body));
+        dispatch(fetchBookSuccess(bookResponse.body));
       } else {
         dispatch(fetchBookObject());
       }
