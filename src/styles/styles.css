@@ -103,9 +103,22 @@ a:hover {
   margin-top: 6px;
 }
 
+.dialogBox {
+  padding: 32px 56px;
+}
+.dialogBoxContent {
+  width: 75%;
+}
+
 @media screen and (max-width: 48em) {
   .editOnSmall {
     padding-left: 0px;
     margin-top: 20px;
+  }
+  .dialogBox {
+    padding: 10px 20px;
+  }
+  .dialogBoxContent {
+    width: 100%;
   }
 }
