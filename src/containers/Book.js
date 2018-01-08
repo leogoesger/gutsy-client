@@ -6,6 +6,8 @@ import {fetchBook} from '../actions/book';
 import {addToCartRequest} from '../actions/user-book';
 import Layout from '../components/book/Layout';
 
+import {openDialog} from '../actions/user-account';
+
 export class Book extends React.Component {
   componentWillMount() {
     this.props.fetchBook(this.props.match.params.id);
@@ -26,12 +28,16 @@ export class Book extends React.Component {
         addToCartRequest={userBookData =>
           this.props.addToCartRequest(userBookData)
         }
+        path={this.props.location}
+        openDialog={() => this.props.openDialog()}
       />
     );
   }
 }
 
 Book.propTypes = {
+  openDialog: PropTypes.func,
+  location: PropTypes.object,
   book: PropTypes.object,
   currentUser: PropTypes.object,
   message: PropTypes.string,
@@ -50,6 +56,7 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    openDialog: () => dispatch(openDialog()),
     fetchBook: climbId => dispatch(fetchBook(climbId)),
     addToCartRequest: userBookData => dispatch(addToCartRequest(userBookData)),
   };

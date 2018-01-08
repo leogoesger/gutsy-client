@@ -12,17 +12,6 @@ import {Colors} from '../../styles/Colors';
 import SignUpModal from '../../containers/SignUpModal';
 
 export default class BookCard extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = {
-      dialogOpen: false,
-    };
-  }
-
-  _toggleDialog() {
-    this.setState({dialogOpen: !this.state.dialogOpen});
-  }
-
   _addToCartRequest() {
     if (this.props.currentUser) {
       this.props.addToCartRequest({
@@ -31,7 +20,7 @@ export default class BookCard extends React.Component {
         userBookStatusId: 2,
       });
     } else {
-      this._toggleDialog();
+      this.props.openDialog();
     }
   }
 
@@ -117,16 +106,15 @@ export default class BookCard extends React.Component {
     return (
       <Paper className="col-lg-9 col-md-10 col-xs-12 mainPaper" zDepth={2}>
         {this._renderBook(this.props.book, this.props.currentUser)}
-        <SignUpModal
-          dialogOpen={this.state.dialogOpen}
-          toggleDialog={() => this._toggleDialog()}
-        />
+        <SignUpModal />
       </Paper>
     );
   }
 }
 
 BookCard.propTypes = {
+  openDialog: PropTypes.func,
+  path: PropTypes.object,
   addToCartRequest: PropTypes.func,
   currentUser: PropTypes.object,
   book: PropTypes.object,

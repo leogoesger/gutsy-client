@@ -45,13 +45,18 @@ export default class Layout extends React.Component {
     this.setState({signUpForm: !this.state.signUpForm});
   }
 
+  _closeDialog() {
+    this.setState({signUpForm: true});
+    this.props.closeDialog();
+  }
+
   render() {
     return (
       <div>
         <Dialog
           modal={false}
           open={this.props.dialogOpen}
-          onRequestClose={() => this.props.toggleDialog()}
+          onRequestClose={() => this._closeDialog()}
           autoDetectWindowHeight={true}
           autoScrollBodyContent={true}
           contentStyle={styles.dialogInner}
@@ -60,13 +65,13 @@ export default class Layout extends React.Component {
           contentClassName="dialogBoxContent"
         >
           <UserDetailCard
-            toggleDialog={() => this.props.toggleDialog()}
+            path={this.props.path}
             signUpForm={this.state.signUpForm}
             signUpUser={userData => this.props.signUpUser(userData)}
             toggleForm={() => this._toggleForm()}
           />
           <LoginCard
-            toggleDialog={() => this.props.toggleDialog()}
+            path={this.props.path}
             signUpForm={this.state.signUpForm}
             loginUser={userData => this.props.loginUser(userData)}
             toggleForm={() => this._toggleForm()}
@@ -87,7 +92,8 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
-  toggleDialog: PropTypes.func.isRequired,
+  path: PropTypes.object,
+  closeDialog: PropTypes.func,
   signUpUser: PropTypes.func.isRequired,
   loginUser: PropTypes.func.isRequired,
   dialogOpen: PropTypes.bool,

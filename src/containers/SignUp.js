@@ -4,8 +4,14 @@ import {connect} from 'react-redux';
 
 import {signUpUser} from '../actions/user-account';
 import Layout from '../components/signUp/Layout';
+import {navigateTo} from '../utils/helpers';
 
 export class SignUp extends React.Component {
+  componentWillReceiveProps(nextProps) {
+    if (!this.props.currentUser && nextProps.currentUser) {
+      navigateTo('/');
+    }
+  }
   render() {
     return (
       <Layout
@@ -17,12 +23,14 @@ export class SignUp extends React.Component {
 }
 
 SignUp.propTypes = {
+  currentUser: PropTypes.object,
   signUpUser: PropTypes.func.isRequired,
   message: PropTypes.string,
 };
 
 const mapStateToProps = state => {
   return {
+    currentUser: state.userAccount.currentUser,
     message: state.userAccount.signUpErrorMessage,
   };
 };

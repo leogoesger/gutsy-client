@@ -56,6 +56,18 @@ const logOutUserObject = () => {
   };
 };
 
+const openDialogObject = () => {
+  return {
+    type: types.OPEN_DIALOG,
+  };
+};
+
+const closeDialogObject = () => {
+  return {
+    type: types.CLOSE_DIALOG,
+  };
+};
+
 const url = 'http://localhost:8000';
 
 export function signUpUser(userData) {
@@ -64,7 +76,8 @@ export function signUpUser(userData) {
       dispatch(signUpRequest());
       const signUpReponse = await request.post(`${url}/signup`).send(userData);
       set(window.localStorage, 'gutsyJwt', signUpReponse.body.gutsyJwt);
-      dispatch(signUpSuccessObject(signUpReponse.body.user));
+      dispatch(closeDialogObject());
+      await dispatch(signUpSuccessObject(signUpReponse.body.fetchUser));
     } catch (e) {
       dispatch(signUpFailObject(e.response.body));
     }
@@ -78,6 +91,7 @@ export function loginUser(userData) {
       const loginResponse = await request.post(`${url}/login`).send(userData);
       set(window.localStorage, 'gutsyJwt', loginResponse.body.gutsyJwt);
       dispatch(loginSuccessObject(loginResponse.body.user));
+      dispatch(closeDialogObject());
     } catch (e) {
       dispatch(loginFailObject(JSON.parse(e.response.text).message));
     }
@@ -104,5 +118,17 @@ export function logOutUser() {
     unset(window.localStorage, 'gutsyJwt');
     dispatch(logOutUserObject());
     navigateTo('/');
+  };
+}
+
+export function openDialog() {
+  return dispatch => {
+    dispatch(openDialogObject());
+  };
+}
+
+export function closeDialog() {
+  return dispatch => {
+    dispatch(closeDialogObject());
   };
 }

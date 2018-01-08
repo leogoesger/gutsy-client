@@ -138,7 +138,7 @@ export default class UserDetailsCard extends React.Component {
               }
               labelStyle={Buttons.orangeButtonLabel}
               disabled={!this._isFormValid()}
-              onClick={() => this._signUpUser(this.state.userData)}
+              onClick={() => this._signUpUser()}
             />
           </div>
         </CardText>
@@ -148,8 +148,8 @@ export default class UserDetailsCard extends React.Component {
 }
 
 UserDetailsCard.propTypes = {
+  path: PropTypes.object,
   signUpForm: PropTypes.bool,
-  toggleDialog: PropTypes.func.isRequired,
   signUpUser: PropTypes.func.isRequired,
   toggleForm: PropTypes.func.isRequired,
 };

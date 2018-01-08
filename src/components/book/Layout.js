@@ -13,6 +13,8 @@ export default class Layout extends React.Component {
           addToCartRequest={userBookData =>
             this.props.addToCartRequest(userBookData)
           }
+          path={this.props.path}
+          openDialog={() => this.props.openDialog()}
         />
       </div>
     );
@@ -20,6 +22,8 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
+  openDialog: PropTypes.func,
+  path: PropTypes.object,
   currentUser: PropTypes.object,
   book: PropTypes.object,
   addToCartRequest: PropTypes.func,
