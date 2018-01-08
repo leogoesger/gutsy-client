@@ -3,6 +3,7 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {fetchBook} from '../actions/book';
+import {addToCartRequest} from '../actions/user-book';
 import Layout from '../components/book/Layout';
 
 export class Book extends React.Component {
@@ -22,6 +23,9 @@ export class Book extends React.Component {
         message={this.props.message}
         book={this.props.book}
         currentUser={this.props.currentUser}
+        addToCartRequest={userBookData =>
+          this.props.addToCartRequest(userBookData)
+        }
       />
     );
   }
@@ -32,6 +36,7 @@ Book.propTypes = {
   currentUser: PropTypes.object,
   message: PropTypes.string,
   fetchBook: PropTypes.func,
+  addToCartRequest: PropTypes.func,
   match: PropTypes.shape({params: PropTypes.shape({id: PropTypes.string})}),
 };
 
@@ -46,6 +51,7 @@ const mapStateToProps = state => {
 const mapDispatchToProps = dispatch => {
   return {
     fetchBook: climbId => dispatch(fetchBook(climbId)),
+    addToCartRequest: userBookData => dispatch(addToCartRequest(userBookData)),
   };
 };
 

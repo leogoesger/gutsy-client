@@ -9,7 +9,13 @@ export default class Layout extends React.Component {
     return (
       <div>
         <Header />
-        <BookCard book={this.props.book} currentUser={this.props.currentUser} />
+        <BookCard
+          book={this.props.book}
+          currentUser={this.props.currentUser}
+          addToCartRequest={userBookData =>
+            this.props.addToCartRequest(userBookData)
+          }
+        />
       </div>
     );
   }
@@ -18,4 +24,5 @@ export default class Layout extends React.Component {
 Layout.propTypes = {
   currentUser: PropTypes.object,
   book: PropTypes.object,
+  addToCartRequest: PropTypes.func,
 };

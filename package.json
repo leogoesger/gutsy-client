@@ -1,8 +1,7 @@
 {
   "name": "gutsy-client",
   "version": "0.1.0",
-  "description":
-    "A climbing route database that contains most up-to-date beta for your favorite routes.",
+  "description": "A climbing route database that contains most up-to-date beta for your favorite routes.",
   "engines": {
     "npm": ">=3"
   },
@@ -25,13 +24,11 @@
     "setup:e2e": "babel-node nightwatch.conf.js",
     "remove-dist": "rimraf ./dist",
     "remove-demo": "babel-node tools/removeDemo.js",
-    "test:e2e:full":
-      "yarn run setup:e2e && yarn run api && yarn run client && wait-on --timeout 300000 http-get://localhost:4000 && node_modules/.bin/nightwatch --config nightwatch.conf.js && yarn run kill:all",
+    "test:e2e:full": "yarn run setup:e2e && yarn run api && yarn run client && wait-on --timeout 300000 http-get://localhost:4000 && node_modules/.bin/nightwatch --config nightwatch.conf.js && yarn run kill:all",
     "test": "jest",
     "test:CI": "babel-node tools/testCi.js",
     "test:cover": "npm run test -- --coverage ",
-    "test:cover:CI":
-      "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
+    "test:cover:CI": "npm run test:CI -- --coverage && cat ./coverage/lcov.info | node_modules/coveralls/bin/coveralls.js",
     "test:watch": "jest --watch",
     "test:e2e": "node_modules/.bin/nightwatch --config nightwatch.conf.js",
     "lint": "esw webpack.config.* src tools --color",
@@ -47,6 +44,7 @@
     "flexboxgrid": "6.3.1",
     "lodash": "4.17.4",
     "material-ui": "0.19.4",
+    "moment": "2.20.1",
     "object-assign": "4.1.0",
     "react": "16.0.0",
     "react-dom": "16.0.0",
@@ -128,16 +126,23 @@
   },
   "jest": {
     "moduleNameMapper": {
-      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$":
-        "<rootDir>/tools/assetsTransformer.js",
+      "\\.(jpg|jpeg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|webm|wav|mp3|m4a|aac|oga)$": "<rootDir>/tools/assetsTransformer.js",
       "\\.(css|less)$": "<rootDir>/tools/assetsTransformer.js"
     },
-    "setupFiles": ["raf/polyfill", "./tools/enzymeTestAdapterSetup.js"]
+    "setupFiles": [
+      "raf/polyfill",
+      "./tools/enzymeTestAdapterSetup.js"
+    ]
   },
   "babel": {
     "env": {
       "development": {
-        "presets": ["env", "react", "react-hmre", "stage-1"]
+        "presets": [
+          "env",
+          "react",
+          "react-hmre",
+          "stage-1"
+        ]
       },
       "production": {
         "presets": [
@@ -162,7 +167,11 @@
         ]
       },
       "test": {
-        "presets": ["env", "react", "stage-1"]
+        "presets": [
+          "env",
+          "react",
+          "stage-1"
+        ]
       }
     }
   },
@@ -173,7 +182,9 @@
       "plugin:import/errors",
       "plugin:import/warnings"
     ],
-    "plugins": ["react"],
+    "plugins": [
+      "react"
+    ],
     "parser": "babel-eslint",
     "parserOptions": {
       "ecmaVersion": 6,
@@ -195,7 +206,10 @@
       "no-console": 1,
       "no-debugger": 1,
       "no-var": 1,
-      "semi": [1, "always"],
+      "semi": [
+        1,
+        "always"
+      ],
       "no-trailing-spaces": 0,
       "eol-last": 0,
       "no-underscore-dangle": 0,
@@ -211,7 +225,9 @@
       "react/forbid-prop-types": [
         1,
         {
-          "forbid": ["any"]
+          "forbid": [
+            "any"
+          ]
         }
       ],
       "react/jsx-boolean-value": 0,

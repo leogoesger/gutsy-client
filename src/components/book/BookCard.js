@@ -1,15 +1,28 @@
 import React from 'react';
 import PropTypes from 'prop-types';
+import moment from 'moment';
 import Paper from 'material-ui/Paper';
+import RaisedButton from 'material-ui/RaisedButton';
 import {CardTitle, CardText} from 'material-ui/Card';
 import Cart from 'material-ui/svg-icons/action/add-shopping-cart';
 
-import RaisedButton from 'material-ui/RaisedButton';
-
 import bookImage from '../../static-data/images/books/bishop-area-select.jpg';
 import {renderAuthor} from '../../utils/helpers';
+import {Colors} from '../../styles/Colors';
 
 export default class BookCard extends React.Component {
+  _addToCartRequest() {
+    if (this.props.currentUser) {
+      this.props.addToCartRequest({
+        userId: this.props.currentUser.id,
+        bookId: this.props.book.id,
+        userBookStatusId: 2,
+      });
+    } else {
+      console.log('Hello');
+    }
+  }
+
   _renderBookImage() {
     return (
       <div className="col-lg-6 col-md-6 col-sm-6 col-xs-12 imageContainer">
@@ -18,26 +31,44 @@ export default class BookCard extends React.Component {
     );
   }
 
-  _renderAddToCardBtn(book, user) {
+  _renderAddToCartBtn(book, user) {
     if (user) {
-      let userBookIndex = null;
+      let bookCartedIndex = null;
+      let bookPurchasedIndex = null;
       user.books.forEach((userBook, index) => {
         if (
+          userBook.UserBook.userBookStatusId === 3 &&
+          userBook.id === book.id
+        ) {
+          bookPurchasedIndex = index;
+        } else if (
           userBook.UserBook.userBookStatusId === 2 &&
           userBook.id === book.id
         ) {
-          userBookIndex = index;
+          bookCartedIndex = index;
         }
       });
-      if (userBookIndex) {
-        const date = new Date(user.books[userBookIndex].UserBook.createdAt);
-        return `Purchased on ${date.getMonth() +
-          1}-${date.getDate()}-${date.getYear() - 100 + 2000}`;
+      if (bookPurchasedIndex) {
+        const date = new Date(
+          user.books[bookPurchasedIndex].UserBook.createdAt
+        );
+        return (
+          <span style={{fontSize: '14px', color: Colors.orange}}>
+            {`Purchased on ${moment(date).format('MMM DD, YYYY')}`}
+          </span>
+        );
+      }
+      if (bookCartedIndex) {
+        return (
+          <span style={{fontSize: '14px', color: Colors.orange}}>
+            {'Added in your cart'}
+          </span>
+        );
       }
     }
     return (
       <RaisedButton
-        onClick={() => console.log('clicking buttons')}
+        onClick={() => this._addToCartRequest()}
         target="_blank"
         backgroundColor="#F0C463"
         label="Add To Cart"
@@ -50,7 +81,7 @@ export default class BookCard extends React.Component {
     return (
       <div className="editOnSmall col-lg-6 col-md-6 col-sm-6 col-xs-12">
         <div style={{display: 'flex', justifyContent: 'flex-end'}}>
-          {this._renderAddToCardBtn(this.props.book, this.props.currentUser)}
+          {this._renderAddToCartBtn(this.props.book, this.props.currentUser)}
         </div>
         <CardTitle title={book.title} subtitle={renderAuthor(book.authors)} />
         <CardText>{book.description}</CardText>
@@ -80,6 +111,7 @@ export default class BookCard extends React.Component {
 }
 
 BookCard.propTypes = {
+  addToCartRequest: PropTypes.func,
   currentUser: PropTypes.object,
   book: PropTypes.object,
 };
