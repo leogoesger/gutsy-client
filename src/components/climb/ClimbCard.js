@@ -11,10 +11,65 @@ import Add from 'material-ui/svg-icons/content/add';
 import image from '../../static-data/images/seven-spanish-angles.jpg';
 import {Colors} from '../../styles/Colors';
 import ClimbInfoIcons from './ClimbInfoIcons';
+import SignUpModal from '../../containers/SignUpModal';
 
 export default class ClimbCard extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      todo: false,
+      complete: false,
+    };
+  }
+
+  componentWillReceiveProps(nextProps) {
+    this.setState({todo: false, complete: false});
+    if (nextProps.climb && nextProps.currentUser) {
+      nextProps.currentUser.climbs.forEach(userClimb => {
+        if (
+          userClimb.UserClimb.userClimbStatusId === 2 &&
+          userClimb.id === nextProps.climb.id
+        ) {
+          this.setState({todo: true});
+        } else if (
+          userClimb.UserClimb.userClimbStatusId === 3 &&
+          userClimb.id === nextProps.climb.id
+        ) {
+          this.setState({complete: true});
+        }
+      });
+    }
+  }
+
   _handleMessageClose() {
     this.setState({showMessage: false, message: ''});
+  }
+
+  _handleUserClimbUpdate(button) {
+    if (this.props.currentUser) {
+      if (button === 'todo' && !this.state.todo) {
+        this.props.userClimbActionRequest({
+          userId: this.props.currentUser.id,
+          climbId: this.props.climb.id,
+          userClimbStatusId: 2,
+        });
+      } else if (button === 'complete' && !this.state.complete) {
+        this.props.userClimbActionRequest({
+          userId: this.props.currentUser.id,
+          climbId: this.props.climb.id,
+          userClimbStatusId: 3,
+        });
+      } else {
+        this.props.userClimbActionRequest({
+          userId: this.props.currentUser.id,
+          climbId: this.props.climb.id,
+          userClimbStatusId: 1,
+        });
+        this.setState({todo: false, complete: false});
+      }
+    } else {
+      this.props.openDialog();
+    }
   }
 
   _renderLink(climb) {
@@ -61,20 +116,34 @@ export default class ClimbCard extends React.Component {
     return (
       <div style={{marginTop: '5px', marginRight: '15px'}}>
         <IconButton
-          tooltip="Add Todo"
+          tooltip={this.state.todo ? 'Remove todo' : 'Add Todo'}
           tooltipPosition="bottom-center"
           iconStyle={styles.actionIcon}
           style={styles.actionIconDiv}
+          onClick={() => this._handleUserClimbUpdate('todo')}
         >
-          <Add className="climbActionIcon" hoverColor={Colors.orange} />
+          <Add
+            className={
+              this.state.todo ? 'climbActionActiveIcon' : 'climbActionIcon'
+            }
+            color={this.state.todo ? Colors.orange : Colors.black}
+            hoverColor={Colors.orange}
+          />
         </IconButton>
         <IconButton
-          tooltip="Completed"
+          tooltip={this.state.complete ? 'Remove Completion' : 'Add Completion'}
           tooltipPosition="bottom-center"
           iconStyle={styles.actionIcon}
           style={styles.actionIconDiv}
+          onClick={() => this._handleUserClimbUpdate('complete')}
         >
-          <Done className="climbActionIcon" hoverColor={Colors.orange} />
+          <Done
+            className={
+              this.state.complete ? 'climbActionActiveIcon' : 'climbActionIcon'
+            }
+            color={this.state.complete ? Colors.orange : Colors.black}
+            hoverColor={Colors.orange}
+          />
         </IconButton>
       </div>
     );
@@ -131,13 +200,17 @@ export default class ClimbCard extends React.Component {
     return (
       <Paper className="col-lg-9 col-md-10 col-xs-12 mainPaper" zDepth={2}>
         {this._renderClimb(this.props.climb)}
+        <SignUpModal />
       </Paper>
     );
   }
 }
 
 ClimbCard.propTypes = {
+  userClimbActionRequest: PropTypes.func,
+  currentUser: PropTypes.object,
   climb: PropTypes.object,
+  openDialog: PropTypes.func,
 };
 
 const styles = {

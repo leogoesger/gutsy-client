@@ -8,6 +8,7 @@ import region from './region';
 import subregion from './subregion';
 import area from './area';
 import subarea from './subarea';
+import shared from './shared';
 
 const rootReducer = combineReducers({
   routing: routerReducer,
@@ -18,6 +19,7 @@ const rootReducer = combineReducers({
   subregion,
   area,
   subarea,
+  shared,
 });
 
 export default rootReducer;

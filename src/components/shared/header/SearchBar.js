@@ -69,17 +69,18 @@ export default class SearchBar extends React.Component {
     });
   }
 
-  _navigateToDetails(location) {
-    if (location.subarea) {
-      navigateTo(`/climbs/${location.id}`);
-    } else if (location.area) {
-      navigateTo(`/subareas/${location.id}`);
-    } else if (location.subregion) {
-      navigateTo(`/areas/${location.id}`);
-    } else if (location.region) {
-      navigateTo(`/subregions/${location.id}`);
+  _navigateToDetails(item) {
+    this.setState({searchText: ''});
+    if (item.subarea) {
+      navigateTo(`/climbs/${item.id}`);
+    } else if (item.area) {
+      navigateTo(`/subareas/${item.id}`);
+    } else if (item.subregion) {
+      navigateTo(`/areas/${item.id}`);
+    } else if (item.region) {
+      navigateTo(`/subregions/${item.id}`);
     } else {
-      navigateTo(`/regions/${location.id}`);
+      navigateTo(`/regions/${item.id}`);
     }
   }
 
@@ -103,6 +104,7 @@ export default class SearchBar extends React.Component {
           hintStyle={styles.hint}
           inputStyle={{height: '30px', color: '#DFE0E1', paddingLeft: '10px'}}
           onUpdateInput={value => this._updateResults(value)}
+          searchText={this.state.searchText}
         />
         <Search style={styles.icon} />
       </div>

@@ -5,7 +5,7 @@ import RegionTypes from './region';
 import SubregionTypes from './subregion';
 import AreaTypes from './area';
 import SubareaTypes from './subarea';
-import UserBookTypes from './user-book';
+import SharedTypes from './shared';
 
 export {UserAccountTypes};
 export {ClimbTypes};
@@ -14,7 +14,7 @@ export {RegionTypes};
 export {SubregionTypes};
 export {AreaTypes};
 export {SubareaTypes};
-export {UserBookTypes};
+export {SharedTypes};
 
 export default {
   UserAccountTypes,
@@ -24,5 +24,5 @@ export default {
   SubregionTypes,
   AreaTypes,
   SubareaTypes,
-  UserBookTypes,
+  SharedTypes,
 };

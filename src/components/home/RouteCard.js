@@ -41,9 +41,9 @@ export default class RouteCard extends React.Component {
             <span className="grade">{climb.grade}</span>
           </TableRowColumn>
           <TableRowColumn style={{width: '35%'}}>
-            {`${climb.subarea.name} < ${climb.subarea.area.name} < ${climb
-              .subarea.area.subregion.name} < ${climb.subarea.area.subregion
-              .region.name}`}
+            {`${climb.subarea.area.subregion.region.name} > ${
+              climb.subarea.area.subregion.name
+            }`}
           </TableRowColumn>
           <TableRowColumn style={{width: '40%'}}>
             {this._renderDescription(climb)}
@@ -69,7 +69,8 @@ export default class RouteCard extends React.Component {
             fixedHeader={true}
             height={this.props.climbs.length > 6 ? '350px' : null}
             onCellClick={rowNumber =>
-              this._navigateToDetails(this.props.climbs[rowNumber].id)}
+              this._navigateToDetails(this.props.climbs[rowNumber].id)
+            }
           >
             <TableHeader displaySelectAll={false} adjustForCheckbox={false}>
               <TableRow>
