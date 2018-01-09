@@ -66,6 +66,7 @@ const styles = {
     fontSize: Theme.buttonLabelSmall,
     color: Colors.white,
     cursor: 'pointer',
+    zIndex: 99,
   },
 };
 

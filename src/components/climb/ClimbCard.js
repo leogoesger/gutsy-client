@@ -11,6 +11,7 @@ import Add from 'material-ui/svg-icons/content/add';
 import image from '../../static-data/images/seven-spanish-angles.jpg';
 import {Colors} from '../../styles/Colors';
 import ClimbInfoIcons from './ClimbInfoIcons';
+import SignUpModal from '../../containers/SignUpModal';
 
 export default class ClimbCard extends React.Component {
   constructor(props) {
@@ -45,25 +46,29 @@ export default class ClimbCard extends React.Component {
   }
 
   _handleUserClimbUpdate(button) {
-    if (button === 'todo' && !this.state.todo) {
-      this.props.userClimbActionRequest({
-        userId: this.props.currentUser.id,
-        climbId: this.props.climb.id,
-        userClimbStatusId: 2,
-      });
-    } else if (button === 'complete' && !this.state.complete) {
-      this.props.userClimbActionRequest({
-        userId: this.props.currentUser.id,
-        climbId: this.props.climb.id,
-        userClimbStatusId: 3,
-      });
+    if (this.props.currentUser) {
+      if (button === 'todo' && !this.state.todo) {
+        this.props.userClimbActionRequest({
+          userId: this.props.currentUser.id,
+          climbId: this.props.climb.id,
+          userClimbStatusId: 2,
+        });
+      } else if (button === 'complete' && !this.state.complete) {
+        this.props.userClimbActionRequest({
+          userId: this.props.currentUser.id,
+          climbId: this.props.climb.id,
+          userClimbStatusId: 3,
+        });
+      } else {
+        this.props.userClimbActionRequest({
+          userId: this.props.currentUser.id,
+          climbId: this.props.climb.id,
+          userClimbStatusId: 1,
+        });
+        this.setState({todo: false, complete: false});
+      }
     } else {
-      this.props.userClimbActionRequest({
-        userId: this.props.currentUser.id,
-        climbId: this.props.climb.id,
-        userClimbStatusId: 1,
-      });
-      this.setState({todo: false, complete: false});
+      this.props.openDialog();
     }
   }
 
@@ -195,6 +200,7 @@ export default class ClimbCard extends React.Component {
     return (
       <Paper className="col-lg-9 col-md-10 col-xs-12 mainPaper" zDepth={2}>
         {this._renderClimb(this.props.climb)}
+        <SignUpModal />
       </Paper>
     );
   }
@@ -204,6 +210,7 @@ ClimbCard.propTypes = {
   userClimbActionRequest: PropTypes.func,
   currentUser: PropTypes.object,
   climb: PropTypes.object,
+  openDialog: PropTypes.func,
 };
 
 const styles = {

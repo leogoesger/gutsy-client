@@ -5,7 +5,6 @@ import {connect} from 'react-redux';
 import {fetchBook} from '../actions/book';
 import {addToCartRequest} from '../actions/user-book';
 import Layout from '../components/book/Layout';
-
 import {openDialog} from '../actions/user-account';
 
 export class Book extends React.Component {

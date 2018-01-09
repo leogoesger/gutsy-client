@@ -34,7 +34,6 @@ const unknownErrorObject = () => {
 
 export function userClimbActionRequest(userClimbData) {
   return async dispatch => {
-    dispatch(userClimbObject());
     try {
       await request
         .post(`${process.env.SERVER_ADDRESS}/api/userClimbs`)
@@ -50,5 +49,11 @@ export function userClimbActionRequest(userClimbData) {
     } catch (e) {
       dispatch(unknownErrorObject());
     }
+  };
+}
+
+export function resetUserClimbMessage() {
+  return dispatch => {
+    dispatch(userClimbObject());
   };
 }

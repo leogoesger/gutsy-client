@@ -3,8 +3,11 @@ import PropTypes from 'prop-types';
 import {connect} from 'react-redux';
 
 import {fetchClimb} from '../actions/climb';
-import {userClimbActionRequest} from '../actions/user-climb';
-
+import {
+  userClimbActionRequest,
+  resetUserClimbMessage,
+} from '../actions/user-climb';
+import {openDialog} from '../actions/user-account';
 import Layout from '../components/climb/Layout';
 
 export class Climb extends React.Component {
@@ -27,12 +30,16 @@ export class Climb extends React.Component {
         userClimbActionRequest={userClimbData =>
           this.props.userClimbActionRequest(userClimbData)
         }
+        openDialog={() => this.props.openDialog()}
+        resetUserClimbMessage={() => this.props.resetUserClimbMessage()}
       />
     );
   }
 }
 
 Climb.propTypes = {
+  resetUserClimbMessage: PropTypes.func,
+  openDialog: PropTypes.func,
   currentUser: PropTypes.object,
   userClimbActionRequest: PropTypes.func,
   climb: PropTypes.object,
@@ -51,6 +58,8 @@ const mapStateToProps = state => {
 
 const mapDispatchToProps = dispatch => {
   return {
+    resetUserClimbMessage: () => dispatch(resetUserClimbMessage()),
+    openDialog: () => dispatch(openDialog()),
     fetchClimb: climbId => dispatch(fetchClimb(climbId)),
     userClimbActionRequest: userClimbData =>
       dispatch(userClimbActionRequest(userClimbData)),

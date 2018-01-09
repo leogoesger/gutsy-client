@@ -30,6 +30,7 @@ export default class Layout extends React.Component {
 
   _handleMessageClose() {
     this.setState({showMessage: false, message: ''});
+    this.props.resetUserClimbMessage();
   }
 
   render() {
@@ -42,6 +43,7 @@ export default class Layout extends React.Component {
           userClimbActionRequest={userClimbData =>
             this.props.userClimbActionRequest(userClimbData)
           }
+          openDialog={() => this.props.openDialog()}
         />
         <Snackbar
           style={{color: 'black'}}
@@ -58,8 +60,10 @@ export default class Layout extends React.Component {
 }
 
 Layout.propTypes = {
+  resetUserClimbMessage: PropTypes.func,
   userClimbActionRequest: PropTypes.func,
   currentUser: PropTypes.object,
   climb: PropTypes.object,
   message: PropTypes.string,
+  openDialog: PropTypes.func,
 };
