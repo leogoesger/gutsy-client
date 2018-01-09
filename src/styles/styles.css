@@ -72,6 +72,13 @@ a:hover {
   cursor: pointer;
 }
 
+.climbActionActiveIcon {
+  border-color: #fd5a1e;
+  border-style: solid;
+  border-width: 1px;
+  border-radius: 4px;
+}
+
 .climbInfoIcon {
   border-style: solid;
   border-width: 1px;
