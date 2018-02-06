@@ -3,7 +3,7 @@
     {
       "name": "gutsy-client",
       "exec_interpreter": "./node_modules/.bin/babel-node",
-      "script": "tools/srcServer.js",
+      "script": "tools/distServer.js",
       "watch": true,
       "env": {
         "NODE_ENV": "development"
