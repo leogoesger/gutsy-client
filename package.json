@@ -14,7 +14,7 @@
     "client": "yarn run start &",
     "kill:all": "pkill -f gutsy",
     "open:cover": "npm run test:cover && opn ./coverage/lcov-report/index.html",
-    "open:dist": "babel-node tools/distServer.js",
+    "open:dist": "NODE_ENV=production babel-node tools/distServer.js",
     "open:src": "babel-node tools/srcServer.js",
     "prestart": "npm-run-all --parallel start-message",
     "preinstall": "node tools/nodeVersionCheck.js",
