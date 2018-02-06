@@ -42,7 +42,6 @@ export default {
     // Generate HTML file that contains references to generated bundles. See here for how this works: https://github.com/ampedandwired/html-webpack-plugin#basic-usage
     new HtmlWebpackPlugin({
       template: 'src/index.ejs',
-      favicon: 'src/favicon.ico',
       minify: {
         removeComments: true,
         collapseWhitespace: true,
@@ -66,100 +65,28 @@ export default {
   ],
   module: {
     rules: [
-      {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        use: ['babel-loader'],
-      },
-      {
-        test: /\.eot(\?v=\d+.\d+.\d+)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              name: '[name].[ext]',
-            },
-          },
-        ],
-      },
+      {test: /\.jsx?$/, exclude: /node_modules/, loaders: ['babel-loader']},
+      {test: /\.eot(\?v=\d+.\d+.\d+)?$/, loader: 'file-loader'},
       {
         test: /\.woff(2)?(\?v=[0-9]\.[0-9]\.[0-9])?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/font-woff',
-              name: '[name].[ext]',
-            },
-          },
-        ],
+        loader: 'url-loader?limit=10000&mimetype=application/font-woff',
       },
       {
         test: /\.[ot]tf(\?v=\d+.\d+.\d+)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'application/octet-stream',
-              name: '[name].[ext]',
-            },
-          },
-        ],
+        loader: 'url-loader?limit=10000&mimetype=application/octet-stream',
       },
       {
         test: /\.svg(\?v=\d+\.\d+\.\d+)?$/,
-        use: [
-          {
-            loader: 'url-loader',
-            options: {
-              limit: 10000,
-              mimetype: 'image/svg+xml',
-              name: '[name].[ext]',
-            },
-          },
-        ],
+        loader: 'url-loader?limit=10000&mimetype=image/svg+xml',
       },
       {
-        test: /\.(jpe?g|png|gif|ico)$/i,
-        use: [
-          {
-            loader: 'file-loader',
-            options: {
-              name: '[name].[ext]',
-            },
-          },
-        ],
+        test: /\.(jpe?g|png|gif|svg)$/i,
+        loader: 'file-loader?name=[name].[ext]',
       },
+      {test: /\.ico$/, loader: 'file-loader?name=[name].[ext]'},
       {
-        test: /(\.css|\.scss|\.sass)$/,
-        exclude: /node_modules/,
-        use: ExtractTextPlugin.extract({
-          use: [
-            {
-              loader: 'css-loader',
-              options: {
-                minimize: true,
-                sourceMap: true,
-              },
-            },
-            {
-              loader: 'postcss-loader',
-              options: {
-                plugins: () => [require('autoprefixer')],
-                sourceMap: true,
-              },
-            },
-            {
-              loader: 'sass-loader',
-              options: {
-                includePaths: [path.resolve(__dirname, 'src', 'scss')],
-                sourceMap: true,
-              },
-            },
-          ],
-        }),
+        test: /(\.css)$/,
+        loaders: ['style-loader', 'css-loader?sourceMap', 'postcss-loader'],
       },
     ],
   },

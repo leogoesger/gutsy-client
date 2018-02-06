@@ -68,13 +68,13 @@ const closeDialogObject = () => {
   };
 };
 
-const url = 'http://localhost:8000';
-
 export function signUpUser(userData) {
   return async dispatch => {
     try {
       dispatch(signUpRequest());
-      const signUpReponse = await request.post(`${url}/signup`).send(userData);
+      const signUpReponse = await request
+        .post(`${process.env.SERVER_ADDRESS}/signup`)
+        .send(userData);
       set(window.localStorage, 'gutsyJwt', signUpReponse.body.gutsyJwt);
       dispatch(closeDialogObject());
       await dispatch(signUpSuccessObject(signUpReponse.body.fetchUser));
@@ -88,7 +88,9 @@ export function loginUser(userData) {
   return async dispatch => {
     try {
       dispatch(loginRequest());
-      const loginResponse = await request.post(`${url}/login`).send(userData);
+      const loginResponse = await request
+        .post(`${process.env.SERVER_ADDRESS}/login`)
+        .send(userData);
       set(window.localStorage, 'gutsyJwt', loginResponse.body.gutsyJwt);
       dispatch(loginSuccessObject(loginResponse.body.user));
       dispatch(closeDialogObject());
@@ -103,7 +105,7 @@ export function fetchCurrentUser() {
     try {
       const gutsyJwt = window.localStorage.gutsyJwt;
       const fetchUserResponse = await request
-        .get(`${url}/users/me`)
+        .get(`${process.env.SERVER_ADDRESS}/users/me`)
         .set('gutsyJwt', gutsyJwt);
       dispatch(fetchCurrentUserSuccess(fetchUserResponse.body));
     } catch (e) {
