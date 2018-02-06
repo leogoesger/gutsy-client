@@ -4,8 +4,10 @@ import webpack from 'webpack';
 import ExtractTextPlugin from 'extract-text-webpack-plugin';
 import WebpackMd5Hash from 'webpack-md5-hash';
 import HtmlWebpackPlugin from 'html-webpack-plugin';
+import autoprefixer from 'autoprefixer';
 import path from 'path';
 import DotenvPlugin from 'webpack-dotenv-plugin';
+import CopyWebpackPlugin from 'copy-webpack-plugin';
 
 const GLOBALS = {
   'process.env.NODE_ENV': JSON.stringify('production'),
@@ -39,6 +41,13 @@ export default {
     // Generate an external css file with a hash in the filename
     new ExtractTextPlugin('[name].[contenthash].css'),
 
+    new CopyWebpackPlugin([
+      {
+        from: path.resolve(__dirname, './src/static-data/images'),
+        to: 'static-data/images',
+      },
+    ]),
+
     // Generate HTML file that contains references to generated bundles. See here for how this works: https://github.com/ampedandwired/html-webpack-plugin#basic-usage
     new HtmlWebpackPlugin({
       template: 'src/index.ejs',
@@ -62,6 +71,17 @@ export default {
 
     // Minify JS
     new webpack.optimize.UglifyJsPlugin({sourceMap: true}),
+
+    new webpack.LoaderOptionsPlugin({
+      minimize: true,
+      debug: false,
+      // set to false to see a list of every file being bundled.
+      noInfo: true,
+      options: {
+        context: '/',
+        postcss: () => [autoprefixer],
+      },
+    }),
   ],
   module: {
     rules: [
