@@ -73,7 +73,7 @@ export function signUpUser(userData) {
     try {
       dispatch(signUpRequest());
       const signUpReponse = await request
-        .post(`${process.env.SERVER_ADDRESS}/signup`)
+        .post(`${process.env.SERVER_ADDRESS}/api/signup`)
         .send(userData);
       set(window.localStorage, 'gutsyJwt', signUpReponse.body.gutsyJwt);
       dispatch(closeDialogObject());
@@ -89,7 +89,7 @@ export function loginUser(userData) {
     try {
       dispatch(loginRequest());
       const loginResponse = await request
-        .post(`${process.env.SERVER_ADDRESS}/login`)
+        .post(`${process.env.SERVER_ADDRESS}/api/login`)
         .send(userData);
       set(window.localStorage, 'gutsyJwt', loginResponse.body.gutsyJwt);
       dispatch(loginSuccessObject(loginResponse.body.user));
@@ -105,7 +105,7 @@ export function fetchCurrentUser() {
     try {
       const gutsyJwt = window.localStorage.gutsyJwt;
       const fetchUserResponse = await request
-        .get(`${process.env.SERVER_ADDRESS}/users/me`)
+        .get(`${process.env.SERVER_ADDRESS}/api/users/me`)
         .set('gutsyJwt', gutsyJwt);
       dispatch(fetchCurrentUserSuccess(fetchUserResponse.body));
     } catch (e) {
