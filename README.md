@@ -12,23 +12,23 @@ This project uses [NodeJS](https://nodejs.org/), [ExpressJS](https://expressjs.c
 1. Install [NodeJS](https://nodejs.org/), [npm](https://www.npmjs.com/), [yarn](https://yarnpkg.com/en/) and [Postgres](https://postgresapp.com/).
 2. Create `dev` and `test` database in Postgres
 
-    ```
-    psql;
-    CREATE DATABASE gutsy_development;
-    CREATE DATABASE gutsy_test;
-    ```
+   ```
+   psql;
+   CREATE DATABASE gutsy_development;
+   CREATE DATABASE gutsy_test;
+   ```
 
 3. Install your dependencies
 
-    ```
-    cd path/to/gutsy-api; yarn
-    ```
+   ```
+   cd path/to/gutsy-api; yarn
+   ```
 
 4. Start your app
 
-    ```
-    yarn start
-    ```
+   ```
+   yarn start
+   ```
 
 ## Testing
 
@@ -41,7 +41,7 @@ It uses [Travis-CI](https://travis-ci.org/) and [Coveralls](https://coveralls.io
 ## Sequelize CLI
 
 ```
-$ npm install -g sequelize-cli            
+$ npm install -g sequelize-cli
 
 $ sequelize model:create --name TodoItem --attributes content:string,complete:boolean #Generate a model
 ```
@@ -56,9 +56,28 @@ For more information on all the things you can do with Sequelize CLI visit [sequ
 "test": "NODE_ENV=test yarn run test-prepare ; NODE_ENV=test npm run mocha", # Clear database before all the tests are run
 "test-cover": "NODE_ENV=test nyc --reporter=text npm run mocha",             # Generate test coverage report locally
 "test-coverage": "nyc report --reporter=text-lcov | coveralls",              # Generate test coverage and send it to Coveralls
-
 ```
 
+## Deployment
+
+```
+location / {
+try_files $uri $uri/ /index.html;
+}
+
+location /api {
+proxy_pass http://localhost:8080;
+proxy_http_version 1.1;
+proxy_set_header Upgrade $http_upgrade;
+proxy_set_header Connection 'upgrade';
+proxy_set_header Host $host;
+proxy_cache_bypass $http_upgrade;
+}
+
+sudo nano /etc/nginx/sites-available/default
+sudo nginx -t
+sudo systemctl restart nginx
+```
 
 ## Options
 
